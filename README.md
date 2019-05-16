@@ -1,4 +1,7 @@
 # :alarm_clock: pwa-timer
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/iondrimba/pwa-timer.svg)](https://greenkeeper.io/)
+
 (WIP) PWA Timer - Playing with Typescript and React Hooks
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
