@@ -1,0 +1,12 @@
+ratings:
+  paths:
+    - "src/**/*.{js,jsx}"
+exclude_paths:
+  - "build"
+  - "config"
+  - "coverage"
+  - "node_modules"
+  - "public"
+  - "scripts"
+  - "src/**/*.spec.{js,jsx,mjs}"
+  - "src/serviceWorker.js"
