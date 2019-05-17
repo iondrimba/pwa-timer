@@ -1,4 +1,4 @@
-# :alarm_clock: pwa-timer
+# :alarm_clock: WIP - pwa-timer
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/iondrimba/pwa-timer.svg)](https://greenkeeper.io/)
 
