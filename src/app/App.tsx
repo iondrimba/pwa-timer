@@ -11,6 +11,7 @@ import Navbar from '../components/Navbar';
 import Home from '../pages/home';
 import About from '../pages/about';
 import Timer from '../pages/timer';
+import Config from '../pages/config';
 
 const App: FC = () => {
   return (
@@ -28,6 +29,7 @@ const App: FC = () => {
         </Navbar>
         <Route exact path="/" component={Home} />
         <Route path="/about" component={() => <About />} />
+        <Route path="/config" component={() => <Config />} />
         <Route path="/timer" component={() => <Timer />} />
       </Router>
     </>

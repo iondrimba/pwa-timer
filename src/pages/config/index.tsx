@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
-import CircularProgress from '../../components/CircularProgress';
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -35,10 +34,6 @@ const GlobalStyle = createGlobalStyle`
     justify-content: space-between;
     display: flex;
     margin-bottom: 30px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-60px) translateX(-50%);
-    left: 50%;
   }
   .number-wrapper {
     display: flex;
@@ -46,25 +41,14 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     margin-bottom: 50px;
     justify-content: center;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
   }
 
   .numbers {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     text-align: center;
-    align-items: center;
-  }
-
-  .numbers:first-child {
-    margin: 0;
-  }
-
-  .numbers:last-child {
-    margin: 0;
+    margin: 0 14px;
   }
 
   .pre-options-wrapper {
@@ -88,7 +72,6 @@ const GlobalStyle = createGlobalStyle`
 
   .current {
     font-size:70px;
-    margin: 0 10px;
   }
 
   .prev {
@@ -109,7 +92,7 @@ const Playbutton = styled.button`
   height: 70px;
   background-color: #fff;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 60px;
   box-shadow: 1px 8px 24px -6px rgba(0,0,0,.2);
   display: flex;
   justify-content: center;
@@ -120,25 +103,31 @@ const Playbutton = styled.button`
   }
 `
 
-const Timer = () => {
+const Config = () => {
   return (
     <Wrapper>
       <GlobalStyle />
-      <CircularProgress>
-        <div className="legend">
-          <label>Min</label>
-          <label>Sec</label>
+      <div className="legend">
+        <label>Min</label>
+        <label>Sec</label>
+      </div>
+      <div className="number-wrapper">
+        <div className="numbers">
+          <span className="prev">59</span>
+          <span className="current">00</span>
+          <span className="next">01</span>
         </div>
-        <div className="number-wrapper">
-          <div className="numbers">
-            <span className="current">00</span>
-            <span>:</span>
-          </div>
-          <div className="numbers">
-            <span className="current">00</span>
-          </div>
+        <div className="numbers">
+          <span className="prev">59</span>
+          <span className="current">00</span>
+          <span className="next">01</span>
         </div>
-      </ CircularProgress >
+      </div>
+      <div className="pre-options-wrapper">
+        <button>1 min</button>
+        <button>3 min</button>
+        <button>5 min</button>
+      </div>
       <Playbutton type="button">
         <Play />
       </Playbutton>
@@ -146,4 +135,4 @@ const Timer = () => {
   )
 };
 
-export default Timer;
+export default Config;
