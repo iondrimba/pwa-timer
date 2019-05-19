@@ -7,10 +7,12 @@ const Title = styled.h1`
   color: palevioletred;
 `;
 
-const About: React.FC = () => {
+const About = () => {
   return (
-    <div>
-      <Title>About</Title>
+    <div className="content">
+      <Title>PWA React Music Player</Title>
+      <p>This is a personal project built in my spare time for learning purposes.</p>
+      <h2>Credits:</h2>
     </div>
   )
 };

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Nav = styled.nav`
@@ -7,11 +7,7 @@ const Nav = styled.nav`
   justify-content: space-between;
 `;
 
-interface NavProps {
-  children?: JSX.Element[],
-}
-
-const Navbar: FC<NavProps> = (props: NavProps) => {
+const Navbar = (props: any) => {
   return (
     <Nav>{props.children}</Nav>
   )

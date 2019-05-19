@@ -28,7 +28,9 @@ const Playbutton = styled.button`
   background-color: #fff;
   cursor: pointer;
   margin-top: 60px;
-
+  box-shadow: 1px 8px 24px -6px rgba(0,0,0,.2);
+  display: flex;
+  justify-content: center;
   svg {
     fill: #6288f7;
     width: 30px;
