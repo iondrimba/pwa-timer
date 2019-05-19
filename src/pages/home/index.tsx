@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { StopWatch } from './styles';
-import { ReactComponent as Icon } from '../../icons/stopwatch.svg';
+import StopWatchIcon from './stopWatch';
+import { ReactComponent as Play } from '../../icons/media-play.svg';
 
-const Title = styled.span`
+const Title = styled.h1`
   font-size: 1.5em;
   text-align: center;
   font-family: blue_highwayd;
   font-display: fallback;
+  margin: 0;
+  font-weight: normal;
 `;
 
 const Wrapper = styled.section`
@@ -18,20 +20,30 @@ const Wrapper = styled.section`
   flex: 1 0;
 `;
 
-const Numbers = styled.span`
-  font-family: bebas_neueregular;
-  font-display: fallback;
-  font-size: 120px;
-`;
+const Playbutton = styled.button`
+  width: 70px;
+  border: none;
+  border-radius: 80px;
+  height: 70px;
+  background-color: #fff;
+  cursor: pointer;
+  margin-top: 60px;
+
+  svg {
+    fill: #6288f7;
+    width: 30px;
+    margin-left: 6px;
+  }
+`
 
 const Home: React.FC = () => {
   return (
     <Wrapper>
-      <StopWatch>
-        <Icon />
-      </StopWatch>
+      <StopWatchIcon/>
       <Title>PWA Timer</Title>
-      <Numbers>25:12:00</Numbers>
+      <Playbutton type="button">
+        <Play />
+      </Playbutton>
     </Wrapper>
   )
 };

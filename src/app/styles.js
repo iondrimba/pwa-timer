@@ -70,10 +70,6 @@ body {
   background-image: linear-gradient(to top,#62a4f7 0%,#6277f7 100%);
 }
 
-ul {
-  list-style: none;
-}
-
 main#root {
   display: flex;
   flex-direction: column;
@@ -83,44 +79,6 @@ main#root {
   padding: 20px;
 }
 `
-
-const InfoButton = styled.button`
-  background: none;
-  border: none;
-
-  svg {
-    width: 35px;
-    height: 35px;
-    fill: #fff;
-    cursor: pointer;
-  }
-`
-
-const GithubButton = styled.button`
-background: none;
-border: none;
-  svg {
-    width: 35px;
-    height: 35px;
-    fill: #fff;
-    cursor: pointer;
-  }
-`
-
-const StopWatch = styled.div`
-background: none;
-border: none;
-  svg {
-    width: 35px;
-    height: 35px;
-    fill: #fff;
-    cursor: pointer;
-  }
-`
-
 export {
   GlobalStyle,
-  InfoButton,
-  GithubButton,
-  StopWatch
 };
