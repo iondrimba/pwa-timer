@@ -1,5 +1,4 @@
 import React, { FC, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { GlobalStyle } from './styles';
 import { Normalize } from 'styled-normalize';
@@ -24,7 +23,7 @@ function RouteMatch(path: string, route: string, Component: any): any {
 }
 
 const App: FC = () => {
-  const [path, setPath] = useState('');
+  const [path, setPath] = useState(history.location.pathname);
   const unlisten = history.listen((location) => {
     setPath(location.pathname);
   });
@@ -43,20 +42,18 @@ const App: FC = () => {
     <>
       <Normalize />
       <GlobalStyle />
-      <Router>
-        <Navbar>
-          <IconButton aria-label="About" to="/about" onClick={onAboutClick}>
-            <Info />
-          </IconButton>
-          <IconButton aria-label="Github" to="https://github.com/iondrimba/pwa-timer" target="_blank" rel="noopener noreferrer">
-            <Github />
-          </IconButton>
-        </Navbar>
-        {RouteMatch("/", path, Home)}
-        {RouteMatch("/about", path, About)}
-        {RouteMatch("/config", path, Config)}
-        {RouteMatch("/timer", path, Timer)}
-      </Router>
+      <Navbar>
+        <IconButton aria-label="About" to="/about" onClick={onAboutClick}>
+          <Info />
+        </IconButton>
+        <IconButton aria-label="Github" to="https://github.com/iondrimba/pwa-timer" target="_blank" rel="noopener noreferrer">
+          <Github />
+        </IconButton>
+      </Navbar>
+      {RouteMatch("/", path, Home)}
+      {RouteMatch("/about", path, About)}
+      {RouteMatch("/config", path, Config)}
+      {RouteMatch("/timer", path, Timer)}
     </>
   );
 }
