@@ -1,6 +1,9 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
+import { ReactComponent as Pause } from '../../icons/pause.svg';
+import { ReactComponent as Replay } from '../../icons/replay.svg';
+import { ReactComponent as Stop } from '../../icons/stop.svg';
 import CircularProgress from '../../components/CircularProgress';
 
 const Title = styled.h1`
@@ -116,8 +119,15 @@ const Playbutton = styled.button`
   svg {
     fill: #6288f7;
     width: 30px;
-    margin-left: 6px;
+    margin-left: 0;
   }
+`
+
+const Controls = styled.div`
+  cursor: pointer;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 `
 
 const Timer = () => {
@@ -139,9 +149,20 @@ const Timer = () => {
           </div>
         </div>
       </ CircularProgress >
+      <Controls>
       <Playbutton type="button">
         <Play />
       </Playbutton>
+      <Playbutton type="button">
+        <Pause />
+      </Playbutton>
+      <Playbutton type="button">
+        <Replay />
+      </Playbutton>
+      <Playbutton type="button">
+        <Stop />
+      </Playbutton>
+      </Controls>
     </Wrapper >
   )
 };

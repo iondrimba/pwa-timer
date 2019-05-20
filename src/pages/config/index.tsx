@@ -103,7 +103,12 @@ const Playbutton = styled.button`
   }
 `
 
-const Config = () => {
+const Config = (props: any) => {
+  function onClick() {;
+    props.navigate('/timer');
+  }
+
+
   return (
     <Wrapper>
       <GlobalStyle />
@@ -128,7 +133,7 @@ const Config = () => {
         <button>3 min</button>
         <button>5 min</button>
       </div>
-      <Playbutton type="button">
+      <Playbutton type="button" onClick={onClick}>
         <Play />
       </Playbutton>
     </Wrapper >

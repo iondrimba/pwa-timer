@@ -38,12 +38,16 @@ const Playbutton = styled.button`
   }
 `
 
-const Home: React.FC = () => {
+const Home: React.FC = (props: any) => {
+  function onClick() {
+    props.navigate('/config');
+  }
+
   return (
     <Wrapper>
       <StopWatchIcon/>
       <Title>PWA Timer</Title>
-      <Playbutton type="button">
+      <Playbutton type="button" onClick={onClick}>
         <Play />
       </Playbutton>
     </Wrapper>
