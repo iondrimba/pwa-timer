@@ -1,17 +1,10 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
 import { ReactComponent as Pause } from '../../icons/pause.svg';
 import { ReactComponent as Replay } from '../../icons/replay.svg';
 import { ReactComponent as Stop } from '../../icons/stop.svg';
 import CircularProgress from '../../components/CircularProgress';
-
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-`;
-
 
 const Wrapper = styled.section`
   justify-content: center;
@@ -43,6 +36,7 @@ const GlobalStyle = createGlobalStyle`
     transform: translateY(-60px) translateX(-50%);
     left: 50%;
   }
+
   .number-wrapper {
     display: flex;
     justify-content: space-between;
@@ -70,38 +64,9 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
-  .pre-options-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 0 10px;
-
-    button {
-      font-family: blue_highwayd;
-      background-color: white;
-      color: #627af7;
-      border-radius: 20px;
-      width: 110px;
-      border: none;
-      padding: 10px 5px;
-      width: 70px;
-      margin: 0 10px;
-    }
-  }
-
   .current {
     font-size:70px;
     margin: 0 10px;
-  }
-
-  .prev {
-    font-size: 40px;
-    opacity: 0.5;
-  }
-
-  .next {
-    font-size: 40px;
-    opacity: 0.5;
   }
 `
 
@@ -122,6 +87,17 @@ const Playbutton = styled.button`
     margin-left: 0;
   }
 `
+const convertSecondsToString = (totalSeconds: string = '60') => {
+  const sec_num = parseInt(totalSeconds, 10);
+  let hours: number = Math.floor(sec_num / 3600);
+  let minutes: number = Math.floor((sec_num - (hours * 3600)) / 60);
+  let seconds: number = sec_num - (hours * 3600) - (minutes * 60);
+
+  return {
+    min: `${minutes < 10 ? '0' + minutes : minutes}`,
+    sec: `${seconds < 10 ? '0' + seconds : seconds}`
+  };
+}
 
 const Controls = styled.div`
   cursor: pointer;
@@ -130,38 +106,73 @@ const Controls = styled.div`
   justify-content: center;
 `
 
-const Timer = () => {
+const Timer = (props: any) => {
+  const [seconds, setSeconds] = useState(120);
+  const [percent, setPercent] = useState(1000);
+  const savedCallback: any = useRef();
+  const staticValue: any = useRef();
+
+  function callback() {
+    setSeconds(seconds - 1);
+  }
+
+  const onPauseClick = () => { }
+  const onPlayClick = () => { }
+
+  useEffect(() => {
+    savedCallback.current = callback;
+    staticValue.current = 1;
+
+    convertSecondsToString()
+  });
+
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+
+    let id = setInterval(tick, 300);
+    return () => clearInterval(id);
+  }, [0]);
+
+  useEffect(() => {
+    const p = Math.floor((seconds / 120) * 100);
+    const pp =  Math.floor((p * 250) / 100);
+
+    setPercent(pp);
+  });
+
   return (
     <Wrapper>
       <GlobalStyle />
-      <CircularProgress>
+      <CircularProgress percent={percent}>
         <div className="legend">
           <label>Min</label>
           <label>Sec</label>
         </div>
         <div className="number-wrapper">
           <div className="numbers">
-            <span className="current">00</span>
+            <span className="current">{convertSecondsToString(seconds.toString()).min}</span>
             <span>:</span>
           </div>
           <div className="numbers">
-            <span className="current">00</span>
+            <span className="current">{convertSecondsToString(seconds.toString()).sec}</span>
           </div>
         </div>
       </ CircularProgress >
       <Controls>
-      <Playbutton type="button">
-        <Play />
-      </Playbutton>
-      <Playbutton type="button">
-        <Pause />
-      </Playbutton>
-      <Playbutton type="button">
-        <Replay />
-      </Playbutton>
-      <Playbutton type="button">
-        <Stop />
-      </Playbutton>
+        <Playbutton onClick={onPlayClick} type="button">
+          <Play />
+        </Playbutton>
+        <Playbutton onClick={onPauseClick} type="button">
+          <Pause />
+        </Playbutton>
+        <Playbutton type="button">
+          <Replay />
+        </Playbutton>
+        <Playbutton type="button">
+          <Stop />
+        </Playbutton>
       </Controls>
     </Wrapper >
   )

@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { tsPropertySignature } from '@babel/types';
 
 const GlobalStyle = createGlobalStyle`
 .circular-progress {
@@ -16,7 +15,6 @@ const GlobalStyle = createGlobalStyle`
   circle {
     stroke-width: 4;
     fill: none;
-    stroke-linecap: round;
   }
   circle: nth-of-type(1) {
     stroke: #fff;
@@ -24,8 +22,6 @@ const GlobalStyle = createGlobalStyle`
   }
   circle: nth-of-type(2) {
     stroke: #5543ff;
-    stroke-dasharray: 251.4285714286;
-    stroke-dashoffset: 75.4285714286
   }
 }
 `
@@ -40,7 +36,7 @@ const CircularProgress = (props: any) => {
         aria-labelledby='title' role='graphic'>
         <title id='title'>svg circular progress bar</title>
         <circle cx="50" cy="50" r="40" ></circle>
-        <circle cx="50" cy="50" r="40" id='pct-ind'></circle>
+        <circle cx="50" cy="50" r="40" strokeDasharray={250} strokeDashoffset={props.percent} id='pct-ind'></circle>
       </svg>
       {props.children}
     </div>
