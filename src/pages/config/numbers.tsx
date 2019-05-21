@@ -55,6 +55,7 @@ const GlobalStyle = createGlobalStyle`
 `
 
 declare var TweenMax: any;
+declare var Back: any;
 
 const formatDecimal = (number: number): string => {
   if (number < 10) {
@@ -74,6 +75,7 @@ const Numbers = (props: any) => {
       TweenMax.to(elmts[index], .3, {
         transform: `translateY(${props.positions[el.index].pos}px)`,
         fontSize: el.index == 2 ? 70 : 40,
+        ease: Back.easeOut.config(1.7), y: -500,
         opacity: el.index < 1 || el.index >= props.positions.length - 1 ? .03 : el.index == 2 ? 1 : .3,
         onComplete: (y: any, t: any) => {
           elmts[y].setAttribute('data-id', props.positions[el.index].pos);
