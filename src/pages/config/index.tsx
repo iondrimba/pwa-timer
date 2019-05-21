@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
 
@@ -41,6 +41,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     margin-bottom: 50px;
     justify-content: center;
+    height: 250px;
   }
 
   .numbers {
@@ -49,6 +50,16 @@ const GlobalStyle = createGlobalStyle`
     justify-content: flex-start;
     text-align: center;
     margin: 0 14px;
+    overflow: hidden;
+    height: inherit;
+    width: 20%;
+    text-align: center;
+    align-items: center;
+
+    span {
+      position: absolute;
+      user-select: none;
+    }
   }
 
   .pre-options-wrapper {
@@ -72,16 +83,31 @@ const GlobalStyle = createGlobalStyle`
 
   .current {
     font-size:70px;
+    transform: translateY(85px);
   }
 
   .prev {
     font-size: 40px;
     opacity: 0.5;
+    transform: translateY(45px);
+  }
+
+  .prevHidden {
+    font-size: 40px;
+    opacity: 0.05;
+    transform: translateY(0);
   }
 
   .next {
     font-size: 40px;
     opacity: 0.5;
+    transform: translateY(159px);
+  }
+
+  .nextHidden {
+    font-size: 40px;
+    opacity: 0.05;
+    transform: translateY(204px);
   }
 `
 
@@ -102,12 +128,80 @@ const Playbutton = styled.button`
     margin-left: 6px;
   }
 `
+declare var TweenMax: any;
+
+const positions: any[] = [
+  { pos: 0, index: 0, text: 58 },
+  { pos: 45, index: 1, text: 59 },
+  { pos: 85, index: 2, text: 0 },
+  { pos: 159, index: 3, text: 1 },
+  { pos: 204, index: 4, text: 2 },
+];
+
+const formatDecimal = (number: number): string => {
+  if (number < 10) {
+    return `0${number}`;
+  }
+
+  return number.toString();
+}
 
 const Config = (props: any) => {
-  function onClick() {;
+  const [counter, setCounter] = useState({ prevHidden: 58, prev: 59, current: 0, next: 1, nextHidden: 2 });
+  const [elements, setElements] = useState<any>([]);
+  const [i, setI] = useState(0);
+
+  function onClick() {
     props.navigate('/timer');
   }
 
+  window.onclick = () => {
+    let index = i + 1;
+
+    if (index > elements.length - 1) {
+      index = 0;
+    }
+
+    setI(index);
+
+    const arr = positions.map((el: any, ix: any) => {
+      if (el.index - 1 < 0) {
+        el.index = positions.length - 1;
+      } else {
+        el.index = el.index - 1;
+      }
+
+      return el;
+    });
+
+    setElements(arr);
+  };
+
+
+  useEffect(() => {
+    elements.map((el: any, index: any) => {
+      const elmts = [...document.querySelectorAll('.numbers span')];
+
+      TweenMax.to(elmts[index], .3, {
+        transform: `translateY(${positions[el.index].pos}px)`,
+        fontSize: el.index == 2 ? 70 : 40,
+        opacity: el.index < 1 || el.index >= positions.length - 1 ? .05 : el.index == 2 ? 1 : .3,
+        onComplete: (y: any, t: any) => {
+          elmts[y].setAttribute('data-id', positions[el.index].pos);
+
+          if (y === positions.length - 1) {
+            const a: any = document.querySelector(`[data-id="${positions[positions.length - 2].pos}"]`);
+            const b: any = document.querySelector(`[data-id="${positions[positions.length - 1].pos}"]`);
+
+            b.textContent = `${formatDecimal(Number(a.textContent) + 1 > 59 ? 0 : Number(a.textContent) + 1)}`;
+          }
+        },
+        onCompleteParams: [index, el]
+      });// eslint-disable-line
+
+    });
+
+  }, [elements]);
 
   return (
     <Wrapper>
@@ -118,14 +212,11 @@ const Config = (props: any) => {
       </div>
       <div className="number-wrapper">
         <div className="numbers">
-          <span className="prev">59</span>
-          <span className="current">00</span>
-          <span className="next">01</span>
-        </div>
-        <div className="numbers">
-          <span className="prev">59</span>
-          <span className="current">00</span>
-          <span className="next">01</span>
+          <span data-id={counter.prevHidden} className="prevHidden">{formatDecimal(counter.prevHidden)}</span>
+          <span data-id={counter.prev} className="prev">{formatDecimal(counter.prev)}</span>
+          <span data-id={counter.current} className="current">{formatDecimal(counter.current)}</span>
+          <span data-id={counter.next} className="next">{formatDecimal(counter.next)}</span>
+          <span data-id={counter.nextHidden} className="nextHidden">{formatDecimal(counter.nextHidden)}</span>
         </div>
       </div>
       <div className="pre-options-wrapper">

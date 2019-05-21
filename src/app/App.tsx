@@ -29,7 +29,7 @@ const App: FC = () => {
   });
 
   function onAboutClick() {
-    setPath('/about');
+    history.push('/about');
   }
 
   useEffect(() => {
@@ -43,10 +43,10 @@ const App: FC = () => {
       <Normalize />
       <GlobalStyle />
       <Navbar>
-        <IconButton aria-label="About" to="/about" onClick={onAboutClick}>
+        <IconButton aria-label="About" onClick={onAboutClick}>
           <Info />
         </IconButton>
-        <IconButton aria-label="Github" to="https://github.com/iondrimba/pwa-timer" target="_blank" rel="noopener noreferrer">
+        <IconButton aria-label="Github" href="https://github.com/iondrimba/pwa-timer" target="_blank" rel="noopener noreferrer">
           <Github />
         </IconButton>
       </Navbar>
