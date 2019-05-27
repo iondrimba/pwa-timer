@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import StopWatchIcon from './stopWatch';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
+import PlayPauseButton from '../../components/PlayPauseButton';
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -20,24 +21,6 @@ const Wrapper = styled.section`
   flex: 1 0;
 `;
 
-const Playbutton = styled.button`
-  width: 70px;
-  border: none;
-  border-radius: 80px;
-  height: 70px;
-  background-color: #fff;
-  cursor: pointer;
-  margin-top: 60px;
-  box-shadow: 1px 8px 24px -6px rgba(0,0,0,.2);
-  display: flex;
-  justify-content: center;
-  svg {
-    fill: #6288f7;
-    width: 30px;
-    margin-left: 6px;
-  }
-`
-
 const Home: React.FC = (props: any) => {
   function onClick() {
     props.navigate('/config');
@@ -47,9 +30,9 @@ const Home: React.FC = (props: any) => {
     <Wrapper>
       <StopWatchIcon/>
       <Title>PWA Timer</Title>
-      <Playbutton type="button" onClick={onClick}>
+      <PlayPauseButton type="button" onClick={onClick}>
         <Play />
-      </Playbutton>
+      </PlayPauseButton>
     </Wrapper>
   )
 };

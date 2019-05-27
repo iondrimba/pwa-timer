@@ -1,25 +1,17 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-const LinkStyled = styled.a`
-background: none;
-border: none;
-width: 48px;
-height: 48px;
-padding: 10px;
-cursor: pointer;
-
-svg {
-  width: 100%;
-  height: auto;
-  fill: #fff;
+const IconButton = styled.button`
+  width: 70px;
+  border: none;
+  height: 70px;
+  background-color: transparent;
   cursor: pointer;
-}
-`
-const IconButton = (props: any) => {
-  return (
-    <LinkStyled {...props} >{props.children}</LinkStyled>
-  )
-};
+  display: flex;
+  justify-content: center;
 
+  svg {
+    fill: #fff;
+    width: 30px;
+  }
+`
 export default IconButton;
