@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
 import Numbers from './numbers';
+import { Ctx } from '../../app/App';
 
 const Wrapper = styled.section`
   justify-content: center;
@@ -75,62 +76,26 @@ const Label = styled.div` {
 }
 `;
 
-const positions: any[] = [
-  { pos: 0, index: 0, text: 58, style: 'prevHidden' },
-  { pos: 45, index: 1, text: 59, style: 'prev' },
-  { pos: 85, index: 2, text: 0, style: 'current' },
-  { pos: 159, index: 3, text: 1, style: 'next' },
-  { pos: 204, index: 4, text: 2, style: 'nextHidden' },
-];
+export const formatDecimal = (number: number): string => {
+  if (number < 10) {
+    return `0${number}`;
+  }
+
+  return number.toString();
+}
 
 const Config = (props: any) => {
-  const [elements, setElements] = useState<any>(positions);
-  const [i, setI] = useState(0);
-  const savedCallback: any = useRef();
-  const staticValue: any = useRef();
+  const context = useContext(Ctx);
+  const [minutes, setMinutes] = useState(context.minutes);
 
-  function setIndex() {
-    if (i + 1 > elements.length - 1) {
-      setI(0);
-    } else {
-      setI(i + 1);
-    }
-
-    const arr = positions.map((el: any, ix: any) => {
-      if (el.index - 1 < 0) {
-        el.index = positions.length - 1;
-      } else {
-        el.index = el.index - 1;
-      }
-
-      return el;
-    });
-
-    setElements(arr);
-  }
-
-  function callback() {
-    setIndex();
-  }
-
-  const onButtonClick = () => { }
   const onClick = () => {
     props.navigate('/timer');
   }
 
-  useEffect(() => {
-    savedCallback.current = callback;
-    staticValue.current = 1;
-  });
-
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-
-    let id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
+  function setMinutesZZ(min: number):void {
+    context.setMinutes(min);
+    setMinutes(min);
+  }
 
   return (
     <Wrapper>
@@ -139,13 +104,13 @@ const Config = (props: any) => {
         <Label>Sec</Label>
       </Legend>
       <NumbersWrapper>
-        <Numbers elements={elements} positions={positions} />
-        <Numbers elements={elements} positions={positions}/>
+        <span>{formatDecimal(minutes)}</span>
+        <span>{formatDecimal(context.seconds)}</span>
       </NumbersWrapper>
       <Options>
-        <button>1 min</button>
-        <button>3 min</button>
-        <button>5 min</button>
+        <button onClick={() => setMinutesZZ(1)}>1 min</button>
+        <button onClick={() => setMinutesZZ(3)}>3 min</button>
+        <button onClick={() => setMinutesZZ(5)}>5 min</button>
       </Options>
       <Playbutton type="button" onClick={onClick}>
         <Play />

@@ -1,10 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
 import { ReactComponent as Pause } from '../../icons/pause.svg';
 import { ReactComponent as Replay } from '../../icons/replay.svg';
 import { ReactComponent as Stop } from '../../icons/stop.svg';
 import CircularProgress from '../../components/CircularProgress';
+import { Ctx } from '../../app/App';
 
 const Wrapper = styled.section`
   justify-content: center;
@@ -107,23 +108,24 @@ const Controls = styled.div`
 `
 
 const Timer = (props: any) => {
-  const [seconds, setSeconds] = useState(120);
-  const [percent, setPercent] = useState(1000);
+  const context = useContext(Ctx);
+  const totalSeconds = 3;
+  const [seconds, setSeconds] = useState(totalSeconds);
+  const [isComplete, setComplete] = useState(false);
+  const [isPaused, setPause] = useState(false);
+  const [percent, setPercent] = useState(0);
   const savedCallback: any = useRef();
-  const staticValue: any = useRef();
 
   function callback() {
-    setSeconds(seconds - 1);
+    if (!isComplete || !isPaused) {
+      setSeconds(seconds - 1);
+    }
   }
-
-  const onPauseClick = () => { }
-  const onPlayClick = () => { }
 
   useEffect(() => {
     savedCallback.current = callback;
-    staticValue.current = 1;
 
-    convertSecondsToString()
+    convertSecondsToString();
   });
 
   useEffect(() => {
@@ -131,16 +133,48 @@ const Timer = (props: any) => {
       savedCallback.current();
     }
 
-    let id = setInterval(tick, 300);
+    let id = 0;
+
+    if (isComplete || isPaused) {
+      clearInterval(id);
+    } else {
+      id = setInterval(tick, 1000)
+    }
+
     return () => clearInterval(id);
-  }, [0]);
+  }, [isComplete, isPaused]);
 
   useEffect(() => {
-    const p = Math.floor((seconds / 120) * 100);
-    const pp =  Math.floor((p * 250) / 100);
+    const percentage = Math.round((seconds / totalSeconds) * 100);
 
-    setPercent(pp);
-  });
+    if(!isPaused) {
+      setPercent((percentage * 251.429) / 100);
+    }
+
+    if (percentage === 0) {
+      setComplete(true);
+    }
+  }, [seconds]);
+
+  function replay() {
+    setSeconds(totalSeconds);
+    setComplete(false);
+  }
+
+  function pause() {
+    setPause(true);
+  }
+
+  function play() {
+    setPause(false);
+    setComplete(false);
+  }
+
+  function stop() {
+    setComplete(true);
+    setPause(false);
+    setSeconds(totalSeconds);
+  }
 
   return (
     <Wrapper>
@@ -161,16 +195,16 @@ const Timer = (props: any) => {
         </div>
       </ CircularProgress >
       <Controls>
-        <Playbutton onClick={onPlayClick} type="button">
+        <Playbutton onClick={play} type="button">
           <Play />
         </Playbutton>
-        <Playbutton onClick={onPauseClick} type="button">
+        <Playbutton onClick={pause} type="button">
           <Pause />
         </Playbutton>
         <Playbutton type="button">
-          <Replay />
+          <Replay onClick={replay} />
         </Playbutton>
-        <Playbutton type="button">
+        <Playbutton onClick={stop} type="button">
           <Stop />
         </Playbutton>
       </Controls>

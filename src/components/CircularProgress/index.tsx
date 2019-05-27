@@ -26,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
 }
 `
 
-const CircularProgress = (props: any) => {
+const CircularProgress = (props: { percent: number, children: JSX.Element[] }) => {
   return (
     <div className="circular-progress">
       <GlobalStyle />
@@ -36,7 +36,7 @@ const CircularProgress = (props: any) => {
         aria-labelledby='title' role='graphic'>
         <title id='title'>svg circular progress bar</title>
         <circle cx="50" cy="50" r="40" ></circle>
-        <circle cx="50" cy="50" r="40" strokeDasharray={250} strokeDashoffset={props.percent} id='pct-ind'></circle>
+        <circle cx="50" cy="50" r="40" strokeDasharray={251.429} strokeDashoffset={props.percent} id='pct-ind'></circle>
       </svg>
       {props.children}
     </div>

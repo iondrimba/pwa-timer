@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, createContext } from 'react';
 import { createBrowserHistory } from 'history';
 import { GlobalStyle } from './styles';
 import { Normalize } from 'styled-normalize';
@@ -15,6 +15,13 @@ import Config from '../pages/config';
 
 const history = createBrowserHistory();
 
+const state: IData = {
+  minutes: 0,
+  seconds: 0,
+  setMinutes: (min: number) => { state.minutes = min; },
+  setSeconds: (sec: number) => { state.seconds = sec; }
+}
+
 function RouteMatch(path: string, route: string, Component: any): any {
   if (path === route) {
     return <Component navigate={history.push} />;
@@ -22,7 +29,17 @@ function RouteMatch(path: string, route: string, Component: any): any {
   return null;
 }
 
-const App: FC = () => {
+export interface IData {
+  minutes: number,
+  seconds: number
+  setMinutes(min: number): void,
+  setSeconds(sec: number): void,
+}
+
+export const Ctx = createContext(state);
+
+
+const App = () => {
   const [path, setPath] = useState(history.location.pathname);
   const unlisten = history.listen((location) => {
     setPath(location.pathname);
@@ -50,10 +67,12 @@ const App: FC = () => {
           <Github />
         </IconButton>
       </Navbar>
-      {RouteMatch("/", path, Home)}
-      {RouteMatch("/about", path, About)}
-      {RouteMatch("/config", path, Config)}
-      {RouteMatch("/timer", path, Timer)}
+      <Ctx.Provider value={state}>
+        {RouteMatch("/", path, Home)}
+        {RouteMatch("/about", path, About)}
+        {RouteMatch("/config", path, Config)}
+        {RouteMatch("/timer", path, Timer)}
+      </Ctx.Provider>
     </>
   );
 }
