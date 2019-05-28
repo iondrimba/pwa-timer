@@ -38,7 +38,8 @@ const App = () => {
     setPath(location.pathname);
   });
 
-  function onAboutClick() {
+  function onAboutClick(e: MouseEvent) {
+    e.preventDefault();
     history.push('/about');
   }
 
@@ -53,7 +54,7 @@ const App = () => {
       <Normalize />
       <GlobalStyle />
       <Navbar>
-        <Link aria-label="About" onClick={onAboutClick}>
+        <Link aria-label="About" onClick={onAboutClick} href="/about">
           <Info />
         </Link>
         <Link aria-label="Github" href="https://github.com/iondrimba/pwa-timer" target="_blank" rel="noopener noreferrer">

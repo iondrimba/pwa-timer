@@ -26,11 +26,11 @@ const IconButton = styled.button`
     height: 100%;
     border-radius: 50px;
     transition: opacity .3s;
-    box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.25);
     top: 0;
   }
 
-  :hover {
+  :hover, :active {
     background-color: rgba(255, 255, 255, 0.2);
   }
 

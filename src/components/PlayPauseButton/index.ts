@@ -30,7 +30,7 @@ export default styled.button`
     border: solid 2px #fff;
     border-radius: 50px;
     transition: opacity .3s;
-    box-shadow: 0px 0px 0px 8px rgba(0,0,0,1);
+    box-shadow: 0px 0px 0px 8px rgba(0,0,0,.2);
     top: 0;
   }
 
@@ -40,6 +40,10 @@ export default styled.button`
 
   :focus::before {
     opacity: .57;
+  }
+
+  :active {
+    box-shadow: 1px 8px 24px -6px rgba(0,0,0,0);
   }
 
   :hover::before {

@@ -24,7 +24,7 @@ const CircularProgressElmt = styled.div`
   }
 
   circle: nth-of-type(2) {
-    stroke: #5543ff;
+    stroke: #6288f7;
   }
 `
 
@@ -35,7 +35,7 @@ const CircularProgress = (props: { percent: number, children: JSX.Element[] }) =
     <CircularProgressElmt>
       <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
         <circle cx="50" cy="50" r="40" ></circle>
-        <circle cx="50" cy="50" r="40" strokeDasharray={INITIAL_VALUE} strokeDashoffset={props.percent} id='pct-ind'></circle>
+        <circle cx="50" cy="50" r="40" strokeDasharray={INITIAL_VALUE} strokeDashoffset={props.percent}></circle>
       </svg>
       {props.children}
     </CircularProgressElmt>

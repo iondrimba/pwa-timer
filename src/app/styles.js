@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
+
 html {
   height: 100%;
   width: 100%;
@@ -32,7 +33,14 @@ body {
   width: inherit;
   color: #fff;
   font-family: 'blue_highwayregular';
+  font-display: swap;
   background-image: linear-gradient(to top,#62a4f7 0%,#6277f7 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button, a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 main#root {

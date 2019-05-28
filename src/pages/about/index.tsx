@@ -95,13 +95,11 @@ const About = () => {
       <Subtitle>Credits:</Subtitle>
       <Ul>
         {
-          credits.map(credit => {
-            return (
-              <li>
+          credits.map((credit, index) => {
+            return <li key={index}>
               <label >{credit.label} </label>
               <a tabIndex={0} target="_blank" rel="noopener noreferrer" href={credit.link}>{credit.author}</a>
             </li>
-            )
           })
         }
 

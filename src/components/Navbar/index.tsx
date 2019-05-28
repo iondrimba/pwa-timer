@@ -7,7 +7,7 @@ const Nav = styled.nav`
   justify-content: space-between;
 `;
 
-const Navbar = (props: any) => {
+const Navbar = (props: { children: JSX.Element[] }) => {
   return (
     <Nav>{props.children}</Nav>
   )

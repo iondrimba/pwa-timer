@@ -50,7 +50,7 @@ const Timer = (props: { navigate: Function }) => {
   const totalSeconds = context.minutes * 60;
   const [seconds, setSeconds] = useState(totalSeconds);
   const [isComplete, setComplete] = useState(false);
-  const [isPaused, setPause] = useState(true);
+  const [isPaused, setPause] = useState(false);
   const [percent, setPercent] = useState(INITIAL_VALUE);
   const savedCallback: React.MutableRefObject<any | undefined> = useRef();
 
