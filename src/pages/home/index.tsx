@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
-import StopWatchIcon from './stopWatch';
+import StopWatchIcon from './StopWatch';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
 import PlayPauseButton from '../../components/PlayPauseButton';
+
+const Next = styled(PlayPauseButton)`
+  margin-top: 50px;
+`
+const PlayIcon = styled(Play)`
+  margin-left: 4px;
+`
 
 const Title = styled.h1`
   font-size: 1.5em;
   text-align: center;
-  font-family: blue_highwayd;
-  font-display: fallback;
   margin: 0;
   font-weight: normal;
 `;
@@ -21,18 +26,18 @@ const Wrapper = styled.section`
   flex: 1 0;
 `;
 
-const Home: React.FC = (props: any) => {
+const Home = (props: { navigate: Function }) => {
   function onClick() {
     props.navigate('/config');
   }
 
   return (
     <Wrapper>
-      <StopWatchIcon/>
+      <StopWatchIcon />
       <Title>PWA Timer</Title>
-      <PlayPauseButton type="button" onClick={onClick}>
-        <Play />
-      </PlayPauseButton>
+      <Next type="button" onClick={onClick} aria-label="Configure timer">
+        <PlayIcon />
+      </Next>
     </Wrapper>
   )
 };

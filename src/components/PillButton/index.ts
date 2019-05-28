@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export default styled.button`
-  font-family: blue_highwayd;
   background-color: white;
-  color: #627af7;
+  color: #3549b3;
   border-radius: 20px;
   width: 110px;
+  cursor: pointer;
   border: none;
   padding: 10px 5px;
   width: 70px;

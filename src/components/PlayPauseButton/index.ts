@@ -15,10 +15,38 @@ export default styled.button`
   svg {
     fill: #6288f7;
     width: 30px;
-    margin-left: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  ::before {
+    content: '';
+    position: absolute;
+    opacity: .01;
+    width: 100%;
+    height: 100%;
+    border: solid 2px #fff;
+    border-radius: 50px;
+    transition: opacity .3s;
+    box-shadow: 0px 0px 0px 8px rgba(0,0,0,1);
+    top: 0;
+  }
+
+  :focus {
+    outline: 0;
+  }
+
+  :focus::before {
+    opacity: .57;
+  }
+
+  :hover::before {
+    opacity: .17;
+  }
+
+  :active::before {
+    opacity: .01;
   }
 `

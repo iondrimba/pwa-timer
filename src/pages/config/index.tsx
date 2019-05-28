@@ -1,46 +1,29 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
+
 import { Ctx } from '../../app/App';
 import { addLeadingZero } from '../../helpers';
+
 import Number from '../../components/Number';
 import PillButton from '../../components/PillButton';
 import PlayPauseButton from '../../components/PlayPauseButton';
 import Divider from '../../components/Divider';
 import Legend from '../../components/Legend';
 
-const Wrapper = styled.section`
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  flex: 1 0;
-  width: 320px;
+import SectionWrapper from './SectionWrapper';
+import Options from './Options';
+import NumbersWrapper from './NumbersWrapper';
+
+const Next = styled(PlayPauseButton)`
+  margin-top: 50px;
 `;
 
-const Options = styled.div` {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 0 10px;
-  height: auto;
-  align-content: space-evenly;
-  flex-wrap: wrap;
+const PlayIcon = styled(Play)`
+  margin-left: 4px;
+`
 
-}
-`;
-
-const NumbersWrapper = styled.div` {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 50px;
-  justify-content: center;
-  height: 150px;
-}
-`;
-
-const Config = (props: any) => {
+const Config = (props: { children: JSX.Element[]; navigate: Function }) => {
   const context = useContext(Ctx);
   const [minutes, setMinutes] = useState(context.minutes);
 
@@ -48,13 +31,13 @@ const Config = (props: any) => {
     props.navigate('/timer');
   }
 
-  function setMinutesZZ(min: number): void {
+  function setMinutesClick(min: number): void {
     context.setMinutes(min);
     setMinutes(min);
   }
 
   return (
-    <Wrapper>
+    <SectionWrapper>
       <Legend big>
         <label>Min</label>
         <label>Sec</label>
@@ -65,17 +48,17 @@ const Config = (props: any) => {
         <Number big>{addLeadingZero(context.seconds)}</Number>
       </NumbersWrapper>
       <Options>
-        <PillButton onClick={() => setMinutesZZ(1)}>1 min</PillButton>
-        <PillButton onClick={() => setMinutesZZ(3)}>3 min</PillButton>
-        <PillButton onClick={() => setMinutesZZ(5)}>5 min</PillButton>
-        <PillButton onClick={() => setMinutesZZ(10)}>10 min</PillButton>
-        <PillButton onClick={() => setMinutesZZ(15)}>15 min</PillButton>
-        <PillButton onClick={() => setMinutesZZ(30)}>30 min</PillButton>
+        <PillButton onClick={() => setMinutesClick(1)} aria-label="set 1 min">1 min</PillButton>
+        <PillButton onClick={() => setMinutesClick(3)} aria-label="set 3 min">3 min</PillButton>
+        <PillButton onClick={() => setMinutesClick(5)} aria-label="set 5 min">5 min</PillButton>
+        <PillButton onClick={() => setMinutesClick(10)} aria-label="set 10 min">10 min</PillButton>
+        <PillButton onClick={() => setMinutesClick(15)} aria-label="set 15 min">15 min</PillButton>
+        <PillButton onClick={() => setMinutesClick(30)} aria-label="set 30 min">30 min</PillButton>
       </Options>
-      <PlayPauseButton type="button" onClick={onClick}>
-        <Play />
-      </PlayPauseButton>
-    </Wrapper >
+      <Next type="button" onClick={onClick} aria-label="start timer">
+        <PlayIcon />
+      </Next>
+    </SectionWrapper >
   )
 };
 

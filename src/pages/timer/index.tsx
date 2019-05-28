@@ -7,7 +7,7 @@ import { ReactComponent as Stop } from '../../icons/stop.svg';
 import { Ctx } from '../../app/App';
 import { convertSecondsToString } from '../../helpers';
 
-import CircularProgress from '../../components/CircularProgress';
+import CircularProgress, { INITIAL_VALUE } from '../../components/CircularProgress';
 import Number from '../../components/Number';
 import IconButton from '../../components/IconButton';
 import PlayPauseButton from '../../components/PlayPauseButton';
@@ -26,8 +26,11 @@ const WrapperSection = styled.section`
 const Controls = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 260px;
-`
+  width: 200px;
+  margin-top: 50px;
+  align-items: center;
+`;
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -38,14 +41,18 @@ const Wrapper = styled.div`
   top: 50%;
   transform: translateY(-50%);
 `
-const Timer = (props: any) => {
+const PlayIcon = styled(Play)`
+  margin-left: 4px;
+`
+
+const Timer = (props: { navigate: Function }) => {
   const context = useContext(Ctx);
-  const totalSeconds = 3;
+  const totalSeconds = context.minutes * 60;
   const [seconds, setSeconds] = useState(totalSeconds);
-  const [isComplete, setComplete] = useState(true);
+  const [isComplete, setComplete] = useState(false);
   const [isPaused, setPause] = useState(true);
-  const [percent, setPercent] = useState(251.429);
-  const savedCallback: any = useRef();
+  const [percent, setPercent] = useState(INITIAL_VALUE);
+  const savedCallback: React.MutableRefObject<any | undefined> = useRef();
 
   function callback() {
     if (!isComplete || !isPaused) {
@@ -79,7 +86,7 @@ const Timer = (props: any) => {
     const percentage = Math.round((seconds / totalSeconds) * 100);
 
     if (!isPaused) {
-      setPercent((percentage * 251.429) / 100);
+      setPercent((percentage * INITIAL_VALUE) / 100);
     }
 
     if (percentage === 0) {
@@ -92,19 +99,24 @@ const Timer = (props: any) => {
     setSeconds(totalSeconds);
     setPause(false);
     setComplete(false);
-    setPercent(251.429);
+    setPercent(INITIAL_VALUE);
   }
 
   function playPause() {
+    if(isComplete) {
+      setSeconds(totalSeconds);
+      setPause(false);
+      setComplete(false);
+    }
+
     setPause(!isPaused);
-    setComplete(!isComplete);
   }
 
   function stop() {
     setComplete(true);
     setPause(true);
     setSeconds(totalSeconds);
-    setPercent(251.429);
+    setPercent(INITIAL_VALUE);
 
     props.navigate('/config');
   }
@@ -116,21 +128,21 @@ const Timer = (props: any) => {
           <label>Min</label>
           <label>Sec</label>
         </CircularProgressLegend>
-        <Wrapper>
+        <Wrapper aria-live="polite">
           <Number>{convertSecondsToString(seconds.toString()).min}</Number>
           <Divider>:</Divider>
           <Number>{convertSecondsToString(seconds.toString()).sec}</Number>
         </Wrapper>
       </ CircularProgress >
       <Controls>
-        <IconButton type="button" onClick={replay}>
+        <IconButton type="button" onClick={replay} aria-label="replay timer">
           <Replay />
         </IconButton>
-        <PlayPauseButton onClick={playPause} type="button">
-          <Play visibility={`${isPaused || isComplete ? 'visible' : 'hidden'}`} />
+        <PlayPauseButton onClick={playPause} type="button" aria-label={`${isPaused || isComplete ? 'start timer' : 'pause timer'}`}>
+          <PlayIcon visibility={`${isPaused || isComplete ? 'visible' : 'hidden'}`} />
           <Pause visibility={`${isPaused || isComplete ? 'hidden' : 'visible'}`} />
         </PlayPauseButton>
-        <IconButton onClick={stop} type="button">
+        <IconButton onClick={stop} type="button" aria-label="stop timer">
           <Stop />
         </IconButton>
       </Controls>
