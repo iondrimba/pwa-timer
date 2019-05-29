@@ -1,4 +1,3 @@
-
 import React from 'react';
 import styled from 'styled-components';
 
@@ -28,7 +27,7 @@ const CircularProgressElmt = styled.div`
   }
 `
 
-export const INITIAL_VALUE = 251.429;
+const INITIAL_VALUE = 251.429;
 
 const CircularProgress = (props: { percent: number, children: JSX.Element[] }) => {
   return (
@@ -40,6 +39,10 @@ const CircularProgress = (props: { percent: number, children: JSX.Element[] }) =
       {props.children}
     </CircularProgressElmt>
   )
+};
+
+export {
+  INITIAL_VALUE
 };
 
 export default CircularProgress;

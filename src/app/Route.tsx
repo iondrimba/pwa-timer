@@ -1,15 +1,15 @@
 import React from 'react';
 
 interface IRouteProps {
-  path: string, route: string, component: any, navigate:any
+  path: string,
+  route: string,
+  children: JSX.Element;
 }
 
-const Route = (props: IRouteProps) : JSX.Element => {
-  return (
-    <>
-    { props.path === props.route ? <props.component navigate={props.navigate} />: null }
-    </>
-  );
-}
+const Route = (props: IRouteProps) : JSX.Element => (
+  <>
+  { props.path === props.route? props.children : null }
+  </>
+)
 
 export default Route;

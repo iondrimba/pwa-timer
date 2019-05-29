@@ -34,6 +34,11 @@ export default styled.button`
     top: 0;
   }
 
+  :disabled {
+    opacity: .4;
+    cursor: not-allowed;
+  }
+
   :focus {
     outline: 0;
   }

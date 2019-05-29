@@ -15,7 +15,7 @@ const Subtitle = styled.p`
   font-weight: bold;
 `;
 
-const Ul = styled.ul `
+const Ul = styled.ul`
   list-style: none;
   padding: 0;
 

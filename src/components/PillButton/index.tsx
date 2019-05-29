@@ -44,84 +44,12 @@ const PillButtonStyled = styled.button`
   :active::before {
     opacity: .01;
   }
-
-  .ripple {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: #fff;
-    opacity: 0;
-    border-radius: 100%;
-    transform: scale(1);
-    top: 50%;
-    left: 50%;
-    transform-origin: center center;
-    pointer-events: none;
-  }
-
-  .animate {
-    animation: 'scale' .3s .03s forwards 1;
-    opacity: .2;
-  }
-
-  .fade-out {
-    animation: 'fadeout' .4s forwards 1;
-    opacity: .2;
-  }
-
-  @keyframes scale {
-    0% {
-      transform: scale(1);
-    }
-    100% {
-      transform: scale(3);
-    }
-  }
-
-  @keyframes fadeout {
-    0% {
-      transform: scale(3);
-      opacity: .2;
-    }
-    100% {
-      transform: scale(3);
-      opacity: 0;
-    }
-  }
-
 `
 
 const PillButton = (props: any) => {
-  const inputEl: any = useRef(null);
-
-  function onMouseDown(evt: any) {
-    evt.persist();
-
-    inputEl.current.classList.remove('fade-out');
-    inputEl.current.classList.add('animate');
-
-    const width = inputEl.current.getBoundingClientRect().width;
-    const height = inputEl.current.getBoundingClientRect().height;
-    const halfW = width/2;
-    const halfH = height/2;
-    const top = evt.nativeEvent.offsetY - halfH;
-    const left = evt.nativeEvent.offsetX - halfW;
-
-    inputEl.current.style.top = `${top}px`;
-    inputEl.current.style.left = `${left}px`;
-
-    const id = setTimeout(function () {
-      inputEl.current.classList.add('fade-out');
-      inputEl.current.classList.remove('animate');
-
-      clearTimeout(id);
-    }, 300);
-  }
-
   return (
-    <PillButtonStyled {...props} onMouseDown={onMouseDown} >
+    <PillButtonStyled {...props}>
       {props.children}
-      <div ref={inputEl} className="ripple"></div>
     </PillButtonStyled>
   )
 };

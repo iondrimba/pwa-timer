@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import React, { useRef, useEffect } from 'react';
 
-const IconButton = styled.button`
+const IconButtonStyled = styled.button`
   width: 50px;
   border: none;
   height: 50px;
@@ -15,22 +16,10 @@ const IconButton = styled.button`
   svg {
     fill: #fff;
     width: 24px;
+    pointer-events: none;
   }
 
-  ::before {
-    content: '';
-    position: absolute;
-    background-color: rgba(255, 255, 255, .46);
-    opacity: .01;
-    width: 100%;
-    height: 100%;
-    border-radius: 50px;
-    transition: opacity .3s;
-    box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.25);
-    top: 0;
-  }
-
-  :hover, :active {
+  :hover:not(:focus) {
     background-color: rgba(255, 255, 255, 0.2);
   }
 
@@ -38,12 +27,21 @@ const IconButton = styled.button`
     outline: 0;
   }
 
-  :focus::before {
-    opacity: .57;
+  :active {
+    background-color: rgba(255, 255, 255, 0);
   }
 
-  :active::before {
-    opacity: .01;
+  :focus:not(:active) {
+    background-color: rgba(255, 255, 255, 0.2);
   }
 `
+
+const IconButton = (props: any) => {
+  return (
+    <IconButtonStyled {...props} >
+      {props.children}
+    </IconButtonStyled>
+  )
+};
+
 export default IconButton;

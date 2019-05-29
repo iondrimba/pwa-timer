@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
+import { Ctx } from '../../app/Store';
 import StopWatchIcon from './StopWatch';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
 import PlayPauseButton from '../../components/PlayPauseButton';
@@ -26,16 +27,22 @@ const Wrapper = styled.section`
   flex: 1 0;
 `;
 
-const Home = (props: { navigate: Function }) => {
-  function onClick() {
-    props.navigate('/config');
-  }
+const Home = () => {
+  const { navigate } = useContext(Ctx);
+
+  useEffect(() => {
+    console.log('mount');
+
+    return () => {
+      console.log('unmount');
+    };
+  },[]);
 
   return (
     <Wrapper>
       <StopWatchIcon />
       <Title>PWA Timer</Title>
-      <Next type="button" onClick={onClick} aria-label="Configure timer">
+      <Next type="button" onClick={() => navigate('/config')} aria-label="Configure timer">
         <PlayIcon />
       </Next>
     </Wrapper>

@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
 
-import { Ctx } from '../../app/App';
+import { Ctx } from '../../app/Store';
 import { addLeadingZero } from '../../helpers';
 
 import Number from '../../components/Number';
@@ -23,18 +23,8 @@ const PlayIcon = styled(Play)`
   margin-left: 4px;
 `
 
-const Config = (props: { children: JSX.Element[]; navigate: Function }) => {
-  const context = useContext(Ctx);
-  const [minutes, setMinutes] = useState(context.minutes);
-
-  const onClick = () => {
-    props.navigate('/timer');
-  }
-
-  function setMinutesClick(min: number): void {
-    context.setMinutes(min);
-    setMinutes(min);
-  }
+const Config = () => {
+  const { minutes, seconds, setMinutes, navigate } = useContext(Ctx);
 
   return (
     <SectionWrapper>
@@ -45,17 +35,17 @@ const Config = (props: { children: JSX.Element[]; navigate: Function }) => {
       <NumbersWrapper>
         <Number big>{addLeadingZero(minutes)}</Number>
         <Divider big>:</Divider>
-        <Number big>{addLeadingZero(context.seconds)}</Number>
+        <Number big>{addLeadingZero(seconds)}</Number>
       </NumbersWrapper>
       <Options>
-        <PillButton onClick={() => setMinutesClick(1)} aria-label="set 1 min">1 min</PillButton>
-        <PillButton onClick={() => setMinutesClick(3)} aria-label="set 3 min">3 min</PillButton>
-        <PillButton onClick={() => setMinutesClick(5)} aria-label="set 5 min">5 min</PillButton>
-        <PillButton onClick={() => setMinutesClick(10)} aria-label="set 10 min">10 min</PillButton>
-        <PillButton onClick={() => setMinutesClick(15)} aria-label="set 15 min">15 min</PillButton>
-        <PillButton onClick={() => setMinutesClick(30)} aria-label="set 30 min">30 min</PillButton>
+        <PillButton onClick={() => setMinutes(1)} aria-label="set 1 min">1 min</PillButton>
+        <PillButton onClick={() => setMinutes(3)} aria-label="set 3 min">3 min</PillButton>
+        <PillButton onClick={() => setMinutes(5)} aria-label="set 5 min">5 min</PillButton>
+        <PillButton onClick={() => setMinutes(10)} aria-label="set 10 min">10 min</PillButton>
+        <PillButton onClick={() => setMinutes(15)} aria-label="set 15 min">15 min</PillButton>
+        <PillButton onClick={() => setMinutes(30)} aria-label="set 30 min">30 min</PillButton>
       </Options>
-      <Next type="button" onClick={onClick} aria-label="start timer">
+      <Next type="button" disabled={(minutes === 0)} onClick={() => navigate('/timer')} aria-label="start timer">
         <PlayIcon />
       </Next>
     </SectionWrapper >

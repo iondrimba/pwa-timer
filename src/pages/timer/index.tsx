@@ -4,7 +4,7 @@ import { ReactComponent as Play } from '../../icons/media-play.svg';
 import { ReactComponent as Pause } from '../../icons/pause.svg';
 import { ReactComponent as Replay } from '../../icons/replay.svg';
 import { ReactComponent as Stop } from '../../icons/stop.svg';
-import { Ctx } from '../../app/App';
+import { Ctx } from '../../app/Store';
 import { convertSecondsToString } from '../../helpers';
 
 import CircularProgress, { INITIAL_VALUE } from '../../components/CircularProgress';
@@ -45,14 +45,14 @@ const PlayIcon = styled(Play)`
   margin-left: 4px;
 `
 
-const Timer = (props: { navigate: Function }) => {
-  const context = useContext(Ctx);
-  const totalSeconds = context.minutes * 60;
+const Timer = () => {
+  const { navigate, minutes, setMinutes } = useContext(Ctx);
+  const totalSeconds = minutes * 60;
   const [seconds, setSeconds] = useState(totalSeconds);
   const [isComplete, setComplete] = useState(false);
   const [isPaused, setPause] = useState(false);
   const [percent, setPercent] = useState(INITIAL_VALUE);
-  const savedCallback: React.MutableRefObject<any | undefined> = useRef();
+  const savedCallback: any = useRef();
 
   function callback() {
     if (!isComplete || !isPaused) {
@@ -103,7 +103,7 @@ const Timer = (props: { navigate: Function }) => {
   }
 
   function playPause() {
-    if(isComplete) {
+    if (isComplete) {
       setSeconds(totalSeconds);
       setPause(false);
       setComplete(false);
@@ -117,8 +117,9 @@ const Timer = (props: { navigate: Function }) => {
     setPause(true);
     setSeconds(totalSeconds);
     setPercent(INITIAL_VALUE);
+    setMinutes(0);
 
-    props.navigate('/config');
+    navigate('/config');
   }
 
   return (

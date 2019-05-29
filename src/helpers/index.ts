@@ -1,11 +1,10 @@
-export const addLeadingZero = (number: number): string => {
+export const addLeadingZero = (number: number) => {
   if (number < 10) {
     return `0${number}`;
   }
 
   return number.toString();
 }
-
 
 export const convertSecondsToString = (totalSeconds: string = '60') => {
   const sec_num = parseInt(totalSeconds, 10);
