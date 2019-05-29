@@ -41,9 +41,10 @@ body {
 
 button, a {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+  touch-action: none;
 }
 
-main#root {
+#root {
   display: flex;
   flex-direction: column;
   height: inherit;
