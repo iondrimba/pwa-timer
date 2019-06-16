@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
+import { ReactComponent as Plus } from '../../icons/plus.svg';
+import { ReactComponent as Minus } from '../../icons/minus.svg';
 
 import { Ctx } from '../../app/Store';
 
@@ -34,6 +36,11 @@ const PlusMinusButton = styled.button`
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0);
   transition: background-color .3s, color .3s;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
 
   :hover, :focus {
     background-color: rgba(255, 255, 255, 0.2);
@@ -49,7 +56,22 @@ const PlusMinusButtonWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   justify-content: space-evenly;
+
+  > div {
+    display: flex;
+  }
 `;
+
+const PlusIcon = styled(Plus)`
+  width: 30px;
+  fill: #fff;
+`
+
+const MinusIcon = styled(Minus)`
+  width: 30px;
+  fill: #fff;
+`
+
 
 const Config = () => {
   const { seconds, setMinutes, navigate, minutesIncrease, minutesDecrease, secondsIncrease, secondsDecrease } = useContext(Ctx);
@@ -67,12 +89,20 @@ const Config = () => {
       </NumbersWrapper>
       <PlusMinusButtonWrapper>
         <div>
-          <PlusMinusButton type="button" aria-label="Increase minutes" onClick={minutesIncrease}>+</PlusMinusButton>
-          <PlusMinusButton type="button" aria-label="Decrease minutes" onClick={minutesDecrease}>-</PlusMinusButton>
+          <PlusMinusButton type="button" aria-label="Increase minutes" onClick={minutesIncrease}>
+            <PlusIcon />
+          </PlusMinusButton>
+          <PlusMinusButton type="button" aria-label="Decrease minutes" onClick={minutesDecrease}>
+            <MinusIcon />
+          </PlusMinusButton>
         </div>
         <div>
-          <PlusMinusButton type="button" aria-label="Increase seconds" onClick={secondsIncrease}>+</PlusMinusButton>
-          <PlusMinusButton type="button" aria-label="Decrease seconds" onClick={secondsDecrease}>-</PlusMinusButton>
+          <PlusMinusButton type="button" aria-label="Increase seconds" onClick={secondsIncrease}>
+            <PlusIcon />
+          </PlusMinusButton>
+          <PlusMinusButton type="button" aria-label="Decrease seconds" onClick={secondsDecrease}>
+            <MinusIcon />
+          </PlusMinusButton>
         </div>
       </PlusMinusButtonWrapper>
       <Options>
