@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { Ctx } from '../../app/Store';
-import StopWatchIcon from './StopWatch';
+import StopWatchIcon from './stopWatch';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
 import PlayPauseButton from '../../components/PlayPauseButton';
 
