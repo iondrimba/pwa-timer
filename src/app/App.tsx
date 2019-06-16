@@ -9,7 +9,7 @@ import Link from '../components/Link';
 import Navbar from '../components/Navbar';
 import Ripple from '../components/Ripple';
 import Route from './Route';
-import { Ctx, State } from './Store';
+import { Ctx } from './Store';
 
 import Home from '../pages/home';
 import About from '../pages/about';
@@ -33,6 +33,30 @@ const App = () => {
     history.push('/about');
   }
 
+  function minutesIncrease() {
+    setSeconds(seconds + 60);
+  }
+
+  function minutesDecrease() {
+    setSeconds(seconds - 60);
+  }
+
+  function secondsIncrease() {
+    if (seconds === 59) {
+      minutesIncrease();
+    }
+
+    setSeconds(seconds + 1);
+  }
+
+  function secondsDecrease() {
+    if (seconds == 0) {
+      minutesDecrease();
+    }
+
+    setSeconds(seconds - 1);
+  }
+
   useEffect(() => {
     return () => {
       unlisten();
@@ -52,18 +76,18 @@ const App = () => {
           <Github />
         </Link>
       </Navbar>
-      <Ctx.Provider value={{ setMinutes, setSeconds, minutes, seconds, navigate: history.push }}>
+      <Ctx.Provider value={{ setMinutes, setSeconds, minutes, seconds, navigate: history.push, minutesIncrease, minutesDecrease, secondsIncrease, secondsDecrease }}>
         <Route path="/" route={path}>
-          <Home/>
+          <Home />
         </Route>
         <Route path="/config" route={path}>
-          <Config/>
+          <Config />
         </Route>
         <Route path="/about" route={path}>
-          <About/>
+          <About />
         </Route>
         <Route path="/timer" route={path}>
-          <Timer/>
+          <Timer />
         </Route>
       </Ctx.Provider>
     </>
