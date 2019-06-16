@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 
 const IconButtonStyled = styled.button`
   width: 50px;
