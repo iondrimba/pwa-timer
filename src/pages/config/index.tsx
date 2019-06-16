@@ -60,7 +60,7 @@ const Config = () => {
         <label>Min</label>
         <label>Sec</label>
       </Legend>
-      <NumbersWrapper>
+      <NumbersWrapper aria-live="assertive">
         <Number big>{convertSecondsToString(seconds.toString()).min}</Number>
         <Divider big>:</Divider>
         <Number big>{convertSecondsToString(seconds.toString()).sec}</Number>
