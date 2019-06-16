@@ -10,6 +10,7 @@ import PillButton from '../../components/PillButton';
 import PlayPauseButton from '../../components/PlayPauseButton';
 import Divider from '../../components/Divider';
 import Legend from '../../components/Legend';
+import { convertSecondsToString } from '../../helpers';
 
 import SectionWrapper from './SectionWrapper';
 import Options from './Options';
@@ -24,7 +25,7 @@ const PlayIcon = styled(Play)`
 `
 
 const Config = () => {
-  const { minutes, seconds, setMinutes, navigate } = useContext(Ctx);
+  const { minutes, seconds, setMinutes, navigate, minutesIncrease, minutesDecrease, secondsIncrease, secondsDecrease } = useContext(Ctx);
 
   return (
     <SectionWrapper>
@@ -33,9 +34,19 @@ const Config = () => {
         <label>Sec</label>
       </Legend>
       <NumbersWrapper>
-        <Number big>{addLeadingZero(minutes)}</Number>
+        <Number big>{convertSecondsToString(seconds.toString()).min}</Number>
         <Divider big>:</Divider>
-        <Number big>{addLeadingZero(seconds)}</Number>
+        <Number big>{convertSecondsToString(seconds.toString()).sec}</Number>
+      </NumbersWrapper>
+      <NumbersWrapper>
+        <div>
+          <button type="button" aria-label="Increase minutes" onClick={minutesIncrease}>+</button>
+          <button type="button" aria-label="Decrease minutes" onClick={minutesDecrease}>-</button>
+        </div>
+        <div>
+          <button type="button" aria-label="Increase seconds" onClick={secondsIncrease}>+</button>
+          <button type="button" aria-label="Decrease seconds" onClick={secondsDecrease}>-</button>
+        </div>
       </NumbersWrapper>
       <Options>
         <PillButton onClick={() => setMinutes(1)} aria-label="set 1 min">1 min</PillButton>
