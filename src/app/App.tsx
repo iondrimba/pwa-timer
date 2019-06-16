@@ -57,7 +57,7 @@ const App = () => {
   }
 
   function secondsDecrease() {
-    if (seconds == 0) {
+    if (seconds === 0) {
       minutesDecrease();
     }
 

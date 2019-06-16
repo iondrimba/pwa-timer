@@ -1,6 +1,4 @@
-import React from 'react';
 import styled from 'styled-components';
-
 
 interface LegendProps {
   readonly big?: boolean;

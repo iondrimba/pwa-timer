@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
 import { ReactComponent as Pause } from '../../icons/pause.svg';
@@ -92,7 +92,7 @@ const Timer = () => {
       setPause(true);
       setComplete(true);
     }
-  }, [seconds]);
+  }, [seconds, isPaused, totalSeconds]);
 
   function replay() {
     setSeconds(totalSeconds);

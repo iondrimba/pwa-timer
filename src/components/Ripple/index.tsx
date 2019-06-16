@@ -84,6 +84,8 @@ const Ripple = () => {
       return () => {
         elements.map((elmt) => {
           elmt.removeEventListener('mousedown', callback);
+
+          return elmt;
         });
       }
     });
