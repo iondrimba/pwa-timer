@@ -1,7 +1,6 @@
 import { createContext } from 'react';
 
 export interface IState {
-  minutes: number,
   seconds: number
   setMinutes(min: number): void,
   setSeconds(sec: number): void,
@@ -13,7 +12,6 @@ export interface IState {
 }
 
 const State: IState = {
-  minutes: 0,
   seconds: 0,
   setMinutes: (min: number) => { },
   setSeconds: (sec: number) => { },
