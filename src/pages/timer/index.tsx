@@ -46,8 +46,7 @@ const PlayIcon = styled(Play)`
 `
 
 const Timer = () => {
-  const { navigate, minutes, setMinutes } = useContext(Ctx);
-  const totalSeconds = minutes * 60;
+  const { navigate, setMinutes, seconds: totalSeconds } = useContext(Ctx);
   const [seconds, setSeconds] = useState(totalSeconds);
   const [isComplete, setComplete] = useState(false);
   const [isPaused, setPause] = useState(false);

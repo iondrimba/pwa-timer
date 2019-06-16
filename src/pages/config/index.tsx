@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
 
 import { Ctx } from '../../app/Store';
-import { addLeadingZero } from '../../helpers';
 
 import Number from '../../components/Number';
 import PillButton from '../../components/PillButton';
@@ -25,7 +24,7 @@ const PlayIcon = styled(Play)`
 `
 
 const Config = () => {
-  const { minutes, seconds, setMinutes, navigate, minutesIncrease, minutesDecrease, secondsIncrease, secondsDecrease } = useContext(Ctx);
+  const { seconds, setMinutes, navigate, minutesIncrease, minutesDecrease, secondsIncrease, secondsDecrease } = useContext(Ctx);
 
   return (
     <SectionWrapper>
@@ -56,7 +55,7 @@ const Config = () => {
         <PillButton onClick={() => setMinutes(15)} aria-label="set 15 min">15 min</PillButton>
         <PillButton onClick={() => setMinutes(30)} aria-label="set 30 min">30 min</PillButton>
       </Options>
-      <Next type="button" disabled={(minutes === 0)} onClick={() => navigate('/timer')} aria-label="start timer">
+      <Next type="button" disabled={(seconds === 0)} onClick={() => navigate('/timer')} aria-label="start timer">
         <PlayIcon />
       </Next>
     </SectionWrapper >

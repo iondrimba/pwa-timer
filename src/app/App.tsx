@@ -10,6 +10,7 @@ import Navbar from '../components/Navbar';
 import Ripple from '../components/Ripple';
 import Route from './Route';
 import { Ctx } from './Store';
+import { secondsToMinutes } from '../helpers';
 
 import Home from '../pages/home';
 import About from '../pages/about';
@@ -21,7 +22,6 @@ const history = createBrowserHistory();
 const App = () => {
   const context = useContext(Ctx);
   const [path, setPath] = useState(history.location.pathname);
-  const [minutes, setMinutes] = useState(context.minutes);
   const [seconds, setSeconds] = useState(context.seconds);
 
   const unlisten = history.listen((location) => {
@@ -33,12 +33,19 @@ const App = () => {
     history.push('/about');
   }
 
+  function setMinutes(minutes: number) {
+    setSeconds(minutes * 60);
+    context.setMinutes(secondsToMinutes(minutes * 60));
+  }
+
   function minutesIncrease() {
     setSeconds(seconds + 60);
+    context.setMinutes(secondsToMinutes(seconds + 60));
   }
 
   function minutesDecrease() {
     setSeconds(seconds - 60);
+    context.setMinutes(secondsToMinutes(seconds - 60));
   }
 
   function secondsIncrease() {
@@ -76,7 +83,7 @@ const App = () => {
           <Github />
         </Link>
       </Navbar>
-      <Ctx.Provider value={{ setMinutes, setSeconds, minutes, seconds, navigate: history.push, minutesIncrease, minutesDecrease, secondsIncrease, secondsDecrease }}>
+      <Ctx.Provider value={{ setMinutes, setSeconds, seconds, navigate: history.push, minutesIncrease, minutesDecrease, secondsIncrease, secondsDecrease }}>
         <Route path="/" route={path}>
           <Home />
         </Route>
