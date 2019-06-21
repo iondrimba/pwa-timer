@@ -1,81 +1,122 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
-import { Ctx } from '../../app/App';
-import { addLeadingZero } from '../../helpers';
+import { ReactComponent as Plus } from '../../icons/plus.svg';
+import { ReactComponent as Minus } from '../../icons/minus.svg';
+
+import { Ctx } from '../../app/Store';
+
 import Number from '../../components/Number';
 import PillButton from '../../components/PillButton';
 import PlayPauseButton from '../../components/PlayPauseButton';
 import Divider from '../../components/Divider';
 import Legend from '../../components/Legend';
+import { convertSecondsToString } from '../../helpers';
 
-const Wrapper = styled.section`
+import SectionWrapper from './SectionWrapper';
+import Options from './Options';
+import NumbersWrapper from './NumbersWrapper';
+
+const Next = styled(PlayPauseButton)`
+  margin-top: 50px;
+`;
+
+const PlayIcon = styled(Play)`
+  margin-left: 4px;
+`
+
+const PlusMinusButton = styled.button`
+  background-color: transparent;
+  border: 0;
+  color: #fff;
+  font-size: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0);
+  transition: background-color .3s, color .3s;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  display: flex;
-  flex-direction: column;
-  flex: 1 0;
-  width: 320px;
-`;
 
-const Options = styled.div` {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 0 10px;
-  height: auto;
-  align-content: space-evenly;
-  flex-wrap: wrap;
 
-}
-`;
+  :hover, :focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
 
-const NumbersWrapper = styled.div` {
+  :focus {
+    outline: 0;
+  }
+`
+const PlusMinusButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 50px;
-  justify-content: center;
-  height: 150px;
-}
+  justify-content: space-evenly;
+
+  > div {
+    display: flex;
+  }
 `;
 
-const Config = (props: any) => {
-  const context = useContext(Ctx);
-  const [minutes, setMinutes] = useState(context.minutes);
+const PlusIcon = styled(Plus)`
+  width: 30px;
+  fill: #fff;
+`
 
-  const onClick = () => {
-    props.navigate('/timer');
-  }
+const MinusIcon = styled(Minus)`
+  width: 30px;
+  fill: #fff;
+`
 
-  function setMinutesZZ(min: number): void {
-    context.setMinutes(min);
-    setMinutes(min);
-  }
+
+const Config = () => {
+  const { seconds, setMinutes, navigate, minutesIncrease, minutesDecrease, secondsIncrease, secondsDecrease } = useContext(Ctx);
 
   return (
-    <Wrapper>
+    <SectionWrapper>
       <Legend big>
         <label>Min</label>
         <label>Sec</label>
       </Legend>
-      <NumbersWrapper>
-        <Number big>{addLeadingZero(minutes)}</Number>
+      <NumbersWrapper aria-live="assertive">
+        <Number big>{convertSecondsToString(seconds.toString()).min}</Number>
         <Divider big>:</Divider>
-        <Number big>{addLeadingZero(context.seconds)}</Number>
+        <Number big>{convertSecondsToString(seconds.toString()).sec}</Number>
       </NumbersWrapper>
+      <PlusMinusButtonWrapper>
+        <div>
+          <PlusMinusButton type="button" aria-label="Increase minutes" onClick={minutesIncrease}>
+            <PlusIcon />
+          </PlusMinusButton>
+          <PlusMinusButton type="button" aria-label="Decrease minutes" onClick={minutesDecrease}>
+            <MinusIcon />
+          </PlusMinusButton>
+        </div>
+        <div>
+          <PlusMinusButton type="button" aria-label="Increase seconds" onClick={secondsIncrease}>
+            <PlusIcon />
+          </PlusMinusButton>
+          <PlusMinusButton type="button" aria-label="Decrease seconds" onClick={secondsDecrease}>
+            <MinusIcon />
+          </PlusMinusButton>
+        </div>
+      </PlusMinusButtonWrapper>
       <Options>
-        <PillButton onClick={() => setMinutesZZ(1)}>1 min</PillButton>
-        <PillButton onClick={() => setMinutesZZ(3)}>3 min</PillButton>
-        <PillButton onClick={() => setMinutesZZ(5)}>5 min</PillButton>
-        <PillButton onClick={() => setMinutesZZ(10)}>10 min</PillButton>
-        <PillButton onClick={() => setMinutesZZ(15)}>15 min</PillButton>
-        <PillButton onClick={() => setMinutesZZ(30)}>30 min</PillButton>
+        <PillButton onClick={() => setMinutes(1)} aria-label="set 1 min">1 min</PillButton>
+        <PillButton onClick={() => setMinutes(3)} aria-label="set 3 min">3 min</PillButton>
+        <PillButton onClick={() => setMinutes(5)} aria-label="set 5 min">5 min</PillButton>
+        <PillButton onClick={() => setMinutes(10)} aria-label="set 10 min">10 min</PillButton>
+        <PillButton onClick={() => setMinutes(15)} aria-label="set 15 min">15 min</PillButton>
+        <PillButton onClick={() => setMinutes(30)} aria-label="set 30 min">30 min</PillButton>
       </Options>
-      <PlayPauseButton type="button" onClick={onClick}>
-        <Play />
-      </PlayPauseButton>
-    </Wrapper >
+      <Next type="button" disabled={(seconds === 0)} onClick={() => navigate('/timer')} aria-label="start timer">
+        <PlayIcon />
+      </Next>
+    </SectionWrapper >
   )
 };
 

@@ -5,6 +5,6 @@ interface DividerProps {
 };
 
 export default styled.div<DividerProps>`
-  font-size:${props => props.big ? 120 : 70}px
+  font-size: ${props => props.big ? 120 : 70}px;
   font-family: bebas_neueregular;
-`
+`;

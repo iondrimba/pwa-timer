@@ -1,4 +1,4 @@
-export const addLeadingZero = (number: number): string => {
+export const addLeadingZero = (number: number) => {
   if (number < 10) {
     return `0${number}`;
   }
@@ -6,12 +6,24 @@ export const addLeadingZero = (number: number): string => {
   return number.toString();
 }
 
+const secondsToHours = (seconds: number): number => {
+  const hours = Math.floor(seconds / 3600);
+
+  return hours;
+}
+
+export const secondsToMinutes = (seconds: number): number => {
+  const minutes = Math.floor((seconds - (secondsToHours(seconds) * 3600)) / 60);
+
+  return minutes;
+}
 
 export const convertSecondsToString = (totalSeconds: string = '60') => {
   const sec_num = parseInt(totalSeconds, 10);
-  let hours: number = Math.floor(sec_num / 3600);
-  let minutes: number = Math.floor((sec_num - (hours * 3600)) / 60);
-  let seconds: number = sec_num - (hours * 3600) - (minutes * 60);
+
+  let hours = secondsToHours(sec_num);
+  let minutes = secondsToMinutes(sec_num);
+  let seconds = sec_num - (hours * 3600) - (minutes * 60);
 
   return {
     min: `${minutes < 10 ? '0' + minutes : minutes}`,
