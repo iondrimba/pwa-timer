@@ -9,6 +9,7 @@ import { ReactComponent as Close } from '../icons/close.svg';
 
 import Link from '../components/Link';
 import Navbar from '../components/Navbar';
+import NavbarTitle from '../components/NavbarTitle';
 import Ripple from '../components/Ripple';
 import Route from './Route';
 import { Ctx } from './Store';
@@ -82,17 +83,17 @@ const App = () => {
       <GlobalStyle />
       <Ripple />
       <Navbar path={path.replace('/', '')}>
-        <Link data-id="back" ripple aria-label="Go back" onClick={onGoBackClick} >
+        <Link data-id="back" ripple aria-label="Go back" onClick={onGoBackClick} href="#" >
           <LeftArrow />
         </Link>
-        <h2>{path === '' ? 'home' : path}</h2>
+        <NavbarTitle title={path === '/' ? 'home' : path.replace('/', '')} />
         <Link data-id="github" aria-label="Github source files" href="https://github.com/iondrimba/pwa-timer" target="_blank" rel="noopener noreferrer">
           <Github />
         </Link>
         <Link data-id="info" ripple aria-label="About" onClick={onAboutClick} href="/about">
           <Info />
         </Link>
-        <Link data-id="close" ripple aria-label="Close" onClick={onGoBackClick}>
+        <Link data-id="close" ripple aria-label="Close" onClick={onGoBackClick} href="#">
           <Close />
         </Link>
       </Navbar>

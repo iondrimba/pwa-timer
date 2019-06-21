@@ -56,6 +56,7 @@ const PlusMinusButtonWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   justify-content: space-evenly;
+  margin: 10px 0;
 
   > div {
     display: flex;
@@ -71,8 +72,6 @@ const MinusIcon = styled(Minus)`
   width: 30px;
   fill: #fff;
 `
-
-
 const Config = () => {
   const { seconds, setMinutes, navigate, minutesIncrease, minutesDecrease, secondsIncrease, secondsDecrease } = useContext(Ctx);
 

@@ -7,6 +7,7 @@ interface LegendProps {
 export default styled.div<LegendProps>`
   justify-content: space-between;
   display: flex;
+  font-size: 20px;
 
   label {
     width:${props => props.big ? 140 : 90}px;
