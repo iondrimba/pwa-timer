@@ -70,10 +70,6 @@ const App = () => {
     window.history.go(-1);
   }
 
-  function onMenuClick() {
-    console.log('click');
-  }
-
   useEffect(() => {
     return () => {
       unlisten();
