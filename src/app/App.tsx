@@ -3,6 +3,7 @@ import { createBrowserHistory } from 'history';
 import { GlobalStyle } from './styles';
 import { Normalize } from 'styled-normalize';
 import { ReactComponent as Info } from '../icons/info.svg';
+import { ReactComponent as LeftArrow } from '../icons/left-arrow.svg';
 import { ReactComponent as Github } from '../icons/github.svg';
 
 import Link from '../components/Link';
@@ -64,6 +65,10 @@ const App = () => {
     setSeconds(seconds - 1);
   }
 
+  function onGoBackClick() {
+    window.history.go(-1);
+  }
+
   useEffect(() => {
     return () => {
       unlisten();
@@ -76,10 +81,13 @@ const App = () => {
       <GlobalStyle />
       <Ripple />
       <Navbar>
+        <Link ripple aria-label="Go back" onClick={onGoBackClick} >
+          <LeftArrow />
+        </Link>
         <Link ripple aria-label="About" onClick={onAboutClick} href="/about">
           <Info />
         </Link>
-        <Link aria-label="Github" href="https://github.com/iondrimba/pwa-timer" target="_blank" rel="noopener noreferrer">
+        <Link aria-label="Github source files" href="https://github.com/iondrimba/pwa-timer" target="_blank" rel="noopener noreferrer">
           <Github />
         </Link>
       </Navbar>
