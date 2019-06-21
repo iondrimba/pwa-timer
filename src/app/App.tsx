@@ -5,6 +5,7 @@ import { Normalize } from 'styled-normalize';
 import { ReactComponent as Info } from '../icons/info.svg';
 import { ReactComponent as LeftArrow } from '../icons/left-arrow.svg';
 import { ReactComponent as Github } from '../icons/github.svg';
+import { ReactComponent as Close } from '../icons/close.svg';
 
 import Link from '../components/Link';
 import Navbar from '../components/Navbar';
@@ -69,6 +70,10 @@ const App = () => {
     window.history.go(-1);
   }
 
+  function onMenuClick() {
+    console.log('click');
+  }
+
   useEffect(() => {
     return () => {
       unlisten();
@@ -80,15 +85,19 @@ const App = () => {
       <Normalize />
       <GlobalStyle />
       <Ripple />
-      <Navbar>
-        <Link ripple aria-label="Go back" onClick={onGoBackClick} >
+      <Navbar path={path.replace('/', '')}>
+        <Link data-id="back" ripple aria-label="Go back" onClick={onGoBackClick} >
           <LeftArrow />
         </Link>
-        <Link ripple aria-label="About" onClick={onAboutClick} href="/about">
+        <h2>{path === '' ? 'home' : path}</h2>
+        <Link data-id="github" aria-label="Github source files" href="https://github.com/iondrimba/pwa-timer" target="_blank" rel="noopener noreferrer">
+          <Github />
+        </Link>
+        <Link data-id="info" ripple aria-label="About" onClick={onAboutClick} href="/about">
           <Info />
         </Link>
-        <Link aria-label="Github source files" href="https://github.com/iondrimba/pwa-timer" target="_blank" rel="noopener noreferrer">
-          <Github />
+        <Link data-id="close" ripple aria-label="Close" onClick={onGoBackClick}>
+          <Close />
         </Link>
       </Navbar>
       <Ctx.Provider value={{ setMinutes, setSeconds, seconds, navigate: history.push, minutesIncrease, minutesDecrease, secondsIncrease, secondsDecrease }}>

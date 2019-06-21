@@ -53,6 +53,7 @@ button, a {
   align-items: center;
   padding: 20px;
 }
+
 `
 export {
   GlobalStyle,
