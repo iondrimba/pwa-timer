@@ -3,7 +3,7 @@ import React from 'react';
 interface IRouteProps {
   path: string,
   route: string,
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 }
 
 const Route = (props: IRouteProps) : JSX.Element => (
