@@ -10,7 +10,7 @@ const IconButtonStyled = styled.button`
   display: flex;
   justify-content: center;
   border-radius: 90px;
-  transition: background-color ${props => props.theme.animationTiming};
+  transition: background-color ${props => props.theme.animationTiming}, transform ${props => props.theme.animationTiming};
   position: relative;
 
   svg {
@@ -29,6 +29,7 @@ const IconButtonStyled = styled.button`
 
   :active {
     background-color: ${props => props.theme.primaryColorSemiTransparent};
+    transform: translate(2px, 2px);
   }
 
   :focus:not(:active) {

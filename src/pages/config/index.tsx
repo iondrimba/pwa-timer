@@ -35,12 +35,11 @@ const PlusMinusButton = styled.button`
   border-radius: 50px;
   cursor: pointer;
   background-color: ${props => props.theme.primaryColorTransparent};
-  transition: background-color ${props => props.theme.animationTiming}, color ${props => props.theme.animationTiming};
+  transition: background-color ${props => props.theme.animationTiming}, color ${props => props.theme.animationTiming}, transform ${props => props.theme.animationTiming};
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
 
   :hover, :focus {
     background-color: ${props => props.theme.primaryColorSemiTransparent};
@@ -50,6 +49,11 @@ const PlusMinusButton = styled.button`
   :focus {
     outline: 0;
   }
+
+  :active {
+    transform: translate(2px, 2px);
+  }
+
 `
 const PlusMinusButtonWrapper = styled.div`
   display: flex;

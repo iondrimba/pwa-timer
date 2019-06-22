@@ -10,7 +10,7 @@ const LinkStyled = styled.a`
   padding: 10px;
   cursor: pointer;
   position: relative;
-  transition:  background-color ${props => props.theme.animationTiming};
+  transition:  background-color ${props => props.theme.animationTiming}, transform ${props => props.theme.animationTiming};
   background-color: ${props => props.theme.primaryColorTransparent};
 
   svg {
@@ -18,6 +18,10 @@ const LinkStyled = styled.a`
     height: auto;
     fill: ${props => props.theme.primaryColor};
     cursor: pointer;
+  }
+
+  :active {
+    transform: translate(2px, 2px);
   }
 
   @media (min-width: 960px) {

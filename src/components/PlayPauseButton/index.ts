@@ -11,6 +11,7 @@ export default styled.button`
   display: flex;
   justify-content: center;
   position: relative;
+  transition: transform ${props => props.theme.animationTiming};
 
   svg {
     fill: ${props => props.theme.secondaryColor};
@@ -29,7 +30,7 @@ export default styled.button`
     height: 100%;
     border: solid 2px ${props => props.theme.primaryColor};
     border-radius: 50px;
-    transition: opacity ${props => props.theme.animationTiming};
+    transition: opacity ${props => props.theme.animationTiming}, transform ${props => props.theme.animationTiming};
     box-shadow: 0px 0px 0px 8px rgba(0,0,0,.2);
     top: 0;
   }
@@ -49,6 +50,7 @@ export default styled.button`
 
   :active {
     box-shadow: 1px 8px 24px -6px rgba(0,0,0,0);
+    transform: translate(2px, 2px);
   }
 
   :hover::before {

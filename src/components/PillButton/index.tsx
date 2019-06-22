@@ -12,7 +12,8 @@ const PillButtonStyled = styled.button`
   width: 110px;
   margin: 5px 5px;
   position: relative;
-  transition: background-color ${props => props.theme.animationTiming}, color ${props => props.theme.animationTiming};
+  transition: background-color ${props => props.theme.animationTiming}, color ${props => props.theme.animationTiming}, transform ${props => props.theme.animationTiming};
+  will-change: transform;
 
   ::before {
     content: '';
@@ -22,7 +23,7 @@ const PillButtonStyled = styled.button`
     width: 100%;
     height: 100%;
     border-radius: 50px;
-    transition: opacity .3s;
+    transition: opacity ${props => props.theme.animationTiming};
     box-shadow: 0px 0px 0px 3px ${props => props.theme.primaryColor};
     top: 0;
     left: 0;
@@ -39,6 +40,10 @@ const PillButtonStyled = styled.button`
 
   :focus::before {
     opacity: .5;
+  }
+
+  :active {
+    transform: translate(2px, 2px);
   }
 
   :active::before {

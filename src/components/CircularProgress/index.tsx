@@ -29,12 +29,12 @@ const CircularProgressElmt = styled.div`
 
 const INITIAL_VALUE = 251.429;
 
-const CircularProgress = (props: { percent: number, children: JSX.Element[] }) => {
+const CircularProgress = (props: { percent: number , children: JSX.Element[] }) => {
   return (
     <CircularProgressElmt>
       <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
         <circle cx="50" cy="50" r="40" ></circle>
-        <circle cx="50" cy="50" r="40" strokeDasharray={INITIAL_VALUE} strokeDashoffset={props.percent}></circle>
+        <circle cx="50" cy="50" r="40" strokeDasharray={INITIAL_VALUE} strokeDashoffset={props.percent || 0}></circle>
       </svg>
       {props.children}
     </CircularProgressElmt>
