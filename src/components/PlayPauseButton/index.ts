@@ -13,7 +13,7 @@ export default styled.button`
   position: relative;
 
   svg {
-    fill: #6288f7;
+    fill: ${props => props.theme.secondaryColor};
     width: 30px;
     position: absolute;
     top: 50%;

@@ -1,13 +1,16 @@
+const primaryColor = "#ffffff";
+
 const Theme = {
-  main: "#fff",
-  primaryColor: "#fff",
-  primaryColorTransparent: `rgba(255, 255, 255, 0)`,
-  primaryColorSemiTransparent: `rgba(255, 255, 255, .2)`,
-  secondaryColor: "#3549b3",
-  thirdiaryColor: "#6288f7",
+  primaryColor: primaryColor,
+  primaryColorTransparent: `${primaryColor}00`,
+  primaryColorSemiTransparent: `${primaryColor}22`,
+  secondaryColor: "#d560ff",
+  thirdiaryColor: "#d560ff",
   primaryFont: 'blue_highwayregular',
   secodaryFont: 'bebas_neueregular',
   animationTiming: `.3s`,
+  bgPrimaryColor: "#fd5f5f",
+  bgSecondaryColor: "#d560ff",
 };
 
 export default Theme;

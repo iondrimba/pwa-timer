@@ -33,9 +33,9 @@ html {
 body {
   height: inherit;
   width: inherit;
-  color: ${props => props.theme.main};
+  color: ${props => props.theme.primaryColor};
   font-family: ${props => props.theme.primaryFont};
-  background-image: linear-gradient(to top, #62a4f7 0%, #6277f7 100%);
+  background-image: linear-gradient(to top, ${props => props.theme.bgPrimaryColor} 0%, ${props => props.theme.bgSecondaryColor} 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

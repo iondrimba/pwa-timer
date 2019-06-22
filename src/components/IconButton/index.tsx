@@ -28,11 +28,11 @@ const IconButtonStyled = styled.button`
   }
 
   :active {
-    background-color: ${props => props.theme.primaryColorTransparent};
+    background-color: ${props => props.theme.primaryColorSemiTransparent};
   }
 
   :focus:not(:active) {
-    background-color: ${props => props.theme.primaryColorTransparent};
+    background-color: ${props => props.theme.primaryColorSemiTransparent};
   }
 `
 
