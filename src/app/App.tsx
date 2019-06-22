@@ -95,7 +95,7 @@ const App = () => {
             <Info />
           </Link>
           <Link data-id="close" ripple aria-label="Close" onClick={onGoBackClick} href="#">
-            <Close />
+            <Close style={{ width: '18px' }} />
           </Link>
         </Navbar>
         <Ctx.Provider value={{ setMinutes, setSeconds, seconds, navigate: history.push, minutesIncrease, minutesDecrease, secondsIncrease, secondsDecrease }}>

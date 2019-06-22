@@ -12,6 +12,9 @@ const LinkStyled = styled.a`
   position: relative;
   transition:  background-color ${props => props.theme.animationTiming}, transform ${props => props.theme.animationTiming};
   background-color: ${props => props.theme.primaryColorTransparent};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   svg {
     width: 100%;
