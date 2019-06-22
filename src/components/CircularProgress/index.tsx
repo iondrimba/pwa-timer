@@ -18,12 +18,12 @@ const CircularProgressElmt = styled.div`
   }
 
   circle: nth-of-type(1) {
-    stroke: #fff;
+    stroke: ${props => props.theme.primaryColor};
     stroke-width: 3.5px;
   }
 
   circle: nth-of-type(2) {
-    stroke: #6288f7;
+    stroke: ${props => props.theme.thirdiaryColor};
   }
 `
 

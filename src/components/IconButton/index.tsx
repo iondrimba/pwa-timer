@@ -5,22 +5,22 @@ const IconButtonStyled = styled.button`
   width: 50px;
   border: none;
   height: 50px;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: ${props => props.theme.primaryColorTransparent};
   cursor: pointer;
   display: flex;
   justify-content: center;
   border-radius: 90px;
-  transition: background-color .2s;
+  transition: background-color ${props => props.theme.animationTiming};
   position: relative;
 
   svg {
-    fill: #fff;
+    fill: ${props => props.theme.primaryColor};
     width: 24px;
     pointer-events: none;
   }
 
   :hover:not(:focus) {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: ${props => props.theme.primaryColorSemiTransparent};
   }
 
   :focus {
@@ -28,11 +28,11 @@ const IconButtonStyled = styled.button`
   }
 
   :active {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: ${props => props.theme.primaryColorTransparent};
   }
 
   :focus:not(:active) {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: ${props => props.theme.primaryColorTransparent};
   }
 `
 

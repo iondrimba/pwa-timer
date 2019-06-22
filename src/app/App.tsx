@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { createBrowserHistory } from 'history';
-import { GlobalStyle } from './styles';
 import { Normalize } from 'styled-normalize';
+import { GlobalStyle, ThemeProvider, Theme } from './styles';
 import { ReactComponent as Info } from '../icons/info.svg';
 import { ReactComponent as LeftArrow } from '../icons/left-arrow.svg';
 import { ReactComponent as Github } from '../icons/github.svg';
@@ -78,40 +78,42 @@ const App = () => {
   });
 
   return (
-    <>
-      <Normalize />
-      <GlobalStyle />
-      <Ripple />
-      <Navbar path={path.replace('/', '')}>
-        <Link data-id="back" ripple aria-label="Go back" onClick={onGoBackClick} href="#" >
-          <LeftArrow />
-        </Link>
-        <NavbarTitle title={path === '/' ? 'home' : path.replace('/', '')} />
-        <Link data-id="github" aria-label="Github source files" href="https://github.com/iondrimba/pwa-timer" target="_blank" rel="noopener noreferrer">
-          <Github />
-        </Link>
-        <Link data-id="info" ripple aria-label="About" onClick={onAboutClick} href="/about">
-          <Info />
-        </Link>
-        <Link data-id="close" ripple aria-label="Close" onClick={onGoBackClick} href="#">
-          <Close />
-        </Link>
-      </Navbar>
-      <Ctx.Provider value={{ setMinutes, setSeconds, seconds, navigate: history.push, minutesIncrease, minutesDecrease, secondsIncrease, secondsDecrease }}>
-        <Route path="/" route={path}>
-          <Home />
-        </Route>
-        <Route path="/config" route={path}>
-          <Config />
-        </Route>
-        <Route path="/about" route={path}>
-          <About />
-        </Route>
-        <Route path="/timer" route={path}>
-          <Timer />
-        </Route>
-      </Ctx.Provider>
-    </>
+    <ThemeProvider theme={Theme}>
+      <>
+        <Normalize />
+        <GlobalStyle />
+        <Ripple />
+        <Navbar path={path.replace('/', '')}>
+          <Link data-id="back" ripple aria-label="Go back" onClick={onGoBackClick} href="#" >
+            <LeftArrow />
+          </Link>
+          <NavbarTitle title={path === '/' ? 'home' : path.replace('/', '')} />
+          <Link data-id="github" aria-label="Github source files" href="https://github.com/iondrimba/pwa-timer" target="_blank" rel="noopener noreferrer">
+            <Github />
+          </Link>
+          <Link data-id="info" ripple aria-label="About" onClick={onAboutClick} href="/about">
+            <Info />
+          </Link>
+          <Link data-id="close" ripple aria-label="Close" onClick={onGoBackClick} href="#">
+            <Close />
+          </Link>
+        </Navbar>
+        <Ctx.Provider value={{ setMinutes, setSeconds, seconds, navigate: history.push, minutesIncrease, minutesDecrease, secondsIncrease, secondsDecrease }}>
+          <Route path="/" route={path}>
+            <Home />
+          </Route>
+          <Route path="/config" route={path}>
+            <Config />
+          </Route>
+          <Route path="/about" route={path}>
+            <About />
+          </Route>
+          <Route path="/timer" route={path}>
+            <Timer />
+          </Route>
+        </Ctx.Provider>
+      </>
+    </ThemeProvider>
   );
 }
 

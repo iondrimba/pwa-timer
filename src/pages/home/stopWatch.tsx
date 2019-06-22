@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   svg {
     width: 100%;
     height: auto;
-    fill: #fff;
+    fill: ${props => props.theme.primaryColor};
   }
 `
 const StopWatchIcon: FC = () => {

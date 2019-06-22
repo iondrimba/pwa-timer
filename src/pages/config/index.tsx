@@ -28,14 +28,14 @@ const PlayIcon = styled(Play)`
 const PlusMinusButton = styled.button`
   background-color: transparent;
   border: 0;
-  color: #fff;
+  color:${props => props.theme.primaryColor};
   font-size: 50px;
   width: 50px;
   height: 50px;
   border-radius: 50px;
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0);
-  transition: background-color .3s, color .3s;
+  background-color: ${props => props.theme.primaryColorTransparent};
+  transition: background-color ${props => props.theme.animationTiming}, color ${props => props.theme.animationTiming};
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -43,8 +43,8 @@ const PlusMinusButton = styled.button`
 
 
   :hover, :focus {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    background-color: ${props => props.theme.primaryColorSemiTransparent};
+    color:${props => props.theme.primaryColor};
   }
 
   :focus {
@@ -65,12 +65,12 @@ const PlusMinusButtonWrapper = styled.div`
 
 const PlusIcon = styled(Plus)`
   width: 30px;
-  fill: #fff;
+  fill: ${props => props.theme.primaryColor};
 `
 
 const MinusIcon = styled(Minus)`
   width: 30px;
-  fill: #fff;
+  fill: ${props => props.theme.primaryColor};
 `
 const Config = () => {
   const { seconds, setMinutes, navigate, minutesIncrease, minutesDecrease, secondsIncrease, secondsDecrease } = useContext(Ctx);

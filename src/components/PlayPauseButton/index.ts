@@ -5,7 +5,7 @@ export default styled.button`
   border: none;
   border-radius: 80px;
   height: 70px;
-  background-color: #fff;
+  background-color: ${props => props.theme.primaryColor};
   cursor: pointer;
   box-shadow: 1px 8px 24px -6px rgba(0,0,0,.2);
   display: flex;
@@ -27,9 +27,9 @@ export default styled.button`
     opacity: .01;
     width: 100%;
     height: 100%;
-    border: solid 2px #fff;
+    border: solid 2px ${props => props.theme.primaryColor};
     border-radius: 50px;
-    transition: opacity .3s;
+    transition: opacity ${props => props.theme.animationTiming};
     box-shadow: 0px 0px 0px 8px rgba(0,0,0,.2);
     top: 0;
   }

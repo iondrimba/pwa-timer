@@ -10,19 +10,19 @@ const LinkStyled = styled.a`
   padding: 10px;
   cursor: pointer;
   position: relative;
-  transition:  background-color .3s;
-  background-color: rgba(255, 255, 255, 0);
+  transition:  background-color ${props => props.theme.animationTiming};
+  background-color: ${props => props.theme.primaryColorTransparent};
 
   svg {
     width: 100%;
     height: auto;
-    fill: #fff;
+    fill: ${props => props.theme.primaryColor};
     cursor: pointer;
   }
 
   @media (min-width: 960px) {
     :hover:not(:focus) {
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: ${props => props.theme.primaryColorSemiTransparent};
     }
 
     :focus {
@@ -30,11 +30,11 @@ const LinkStyled = styled.a`
     }
 
     :active {
-      background-color: rgba(255, 255, 255, 0);
+      background-color: ${props => props.theme.primaryColorTransparent};
     }
 
     :focus:not(:active) {
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: ${props => props.theme.primaryColorSemiTransparent};
     }
   }
 `

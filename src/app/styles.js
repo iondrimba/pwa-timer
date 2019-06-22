@@ -1,4 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import Theme from './theme';
 
 const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -24,7 +25,6 @@ const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
-
 html {
   height: 100%;
   width: 100%;
@@ -33,9 +33,9 @@ html {
 body {
   height: inherit;
   width: inherit;
-  color: #fff;
-  font-family: 'blue_highwayregular';
-  background-image: linear-gradient(to top,#62a4f7 0%,#6277f7 100%);
+  color: ${props => props.theme.main};
+  font-family: ${props => props.theme.primaryFont};
+  background-image: linear-gradient(to top, #62a4f7 0%, #6277f7 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -57,4 +57,6 @@ button, a {
 `
 export {
   GlobalStyle,
+  ThemeProvider,
+  Theme,
 };

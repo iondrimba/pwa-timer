@@ -29,7 +29,7 @@ const Ul = styled.ul`
   }
 
   a {
-    color: #fff;
+    color: ${props => props.theme.primaryColor};
   }
 `;
 

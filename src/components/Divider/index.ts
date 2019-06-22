@@ -6,5 +6,5 @@ interface DividerProps {
 
 export default styled.div<DividerProps>`
   font-size: ${props => props.big ? 120 : 70}px;
-  font-family: bebas_neueregular;
+  font-family: ${props => props.theme.secodaryFont};
 `;
