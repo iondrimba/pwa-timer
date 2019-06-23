@@ -1,6 +1,25 @@
 import styled from 'styled-components';
+import posed from 'react-pose';
 
-export default styled.button`
+const Btn = posed.button({
+  enter: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      y: { type: 'spring', duration: 200 },
+      opacity: { ease: 'easeOut', duration: 300 ,  delay: 200},
+    }
+  },
+  exit: {
+    opacity: 0,
+    y: 50,
+    transition: {
+      opacity: { ease: 'easeOut', duration: 300 },
+    }
+  },
+});
+
+export default styled(Btn)`
   width: 70px;
   border: none;
   border-radius: 80px;
@@ -11,7 +30,6 @@ export default styled.button`
   display: flex;
   justify-content: center;
   position: relative;
-  transition: transform ${props => props.theme.animationTiming};
 
   svg {
     fill: ${props => props.theme.secondaryColor};
@@ -49,6 +67,7 @@ export default styled.button`
   }
 
   :active {
+    transition: transform ${props => props.theme.animationTiming};
     box-shadow: 1px 8px 24px -6px rgba(0,0,0,0);
     transform: translate(2px, 2px);
   }
