@@ -6,8 +6,8 @@ install:
   - npm install -g npm
   - npm i
 test_script:
-  - npm run build
-  - npm run coverage
+  - CI=false npm run build
+  - CI=false npm run coverage
 build: off
 matrix:
   fast_finish: true
