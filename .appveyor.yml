@@ -1,18 +1,23 @@
 init:
   - git config --global core.autocrlf true
-
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm install -g npm
   - npm i
+environment:
+    CI: false
+before_build:
+  - node --version
+  - npm --version
 test_script:
-  - CI=false npm run build
-  - CI=false npm run coverage
+  - set CI=false npm run build
+  - set CI=false npm run coverage
 build: off
 matrix:
   fast_finish: true
 cache:
-  - node_modules -> package.json
+- node_modules -> package.json
+- '%APPDATA%\npm-cache'
 notifications:
   - provider: Email
     to:
