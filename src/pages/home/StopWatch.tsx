@@ -1,5 +1,5 @@
 import React from 'react';
-import posed, { PoseGroup } from 'react-pose';
+import posed from 'react-pose';
 import styled from 'styled-components';
 import { ReactComponent as Icon } from '../../icons/stopwatch.svg';
 
@@ -24,7 +24,6 @@ const StopWatchIconPose = posed.div({
     }
   },
 });
-
 
 const Wrapper = styled(StopWatchIconPose)`
   width: 135px;
