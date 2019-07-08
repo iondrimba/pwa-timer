@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import posed, { PoseGroup } from 'react-pose';
 import { Ctx } from '../../app/Store';
-import StopWatchIcon from './stopWatch';
+import StopWatchIcon from './StopWatch';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
 import PlayPauseButton from '../../components/PlayPauseButton';
 
@@ -64,7 +64,7 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <StopWatchIcon key="StopWatchIcon" pose={visible? 'enter': 'exit'} />
+      <StopWatchIcon key="StopWatchIcon" pose={visible ? 'enter' : 'exit'} />
       <PoseGroup>
         {visible &&
           [
