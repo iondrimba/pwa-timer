@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Spring, config } from 'react-spring/renderprops'
 import styled from 'styled-components';
-import posed, { PoseGroup } from 'react-pose';
 import { Ctx } from '../../app/Store';
 import StopWatchIcon from './StopWatch';
 import { ReactComponent as Play } from '../../icons/media-play.svg';
@@ -9,36 +9,12 @@ import PlayPauseButton from '../../components/PlayPauseButton';
 const PlayIcon = styled(Play)`
   margin-left: 4px;
 `
-
-const TitlePose = posed.h1({
-  enter: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      y: {
-        type: 'spring',
-        duration: 200,
-        delay: 200
-      },
-      opacity: { ease: 'easeOut', duration: 300, delay: 300 },
-    }
-  },
-  exit: {
-    opacity: 0,
-    y: 50,
-    transition: {
-      opacity: { ease: 'easeOut', duration: 300 },
-    }
-  },
-});
-
-const Title = styled(TitlePose)`
+const Title = styled.h1`
   font-size: 1.5em;
   text-align: center;
   margin: 0;
   font-weight: normal;
 `;
-
 
 const Wrapper = styled.section`
   justify-content: center;
@@ -62,19 +38,50 @@ const Home = () => {
     };
   }, []);
 
+  function outro() {
+    navigate('/config');
+  }
+
   return (
     <Wrapper>
-      <StopWatchIcon key="StopWatchIcon" pose={visible ? 'enter' : 'exit'} />
-      <PoseGroup>
-        {visible &&
-          [
-            <Title key="Title">PWA Timer</Title>,
-            <Next key="Next" type="button" onClick={() => navigate('/config')} aria-label="Configure timer">
-              <PlayIcon />
-            </Next>
-          ]
+      <Spring config={{ tension: 180, friction: 12 }} from={{
+        opacity: 0,
+        transform: 'translateY(100px)'
+      }}
+        to={{
+          opacity: 1,
+          transform: 'translateY(0)',
+        }}>
+        {props =>
+          <StopWatchIcon style={props} key="StopWatchIcon" />
         }
-      </PoseGroup>
+      </Spring >
+
+      <Spring config={{ delay: 100, tension: 180, friction: 12 }} from={{
+        opacity: 0,
+        transform: 'translateY(100px)'
+      }}
+        to={{
+          opacity: 1,
+          transform: 'translateY(0)',
+        }}>
+        {props => <Title style={props} key="Title">PWA Timer</Title>}
+      </Spring >
+      <Spring config={{ delay: 200, tension: 180, friction: 12 }} from={{
+        opacity: 0,
+        transform: 'translateY(100px)'
+      }}
+        to={{
+          opacity: 1,
+          transform: 'translateY(0)',
+        }}>
+        {props =>
+          <Next key="Next" style={props} type="button" onClick={() => outro()} aria-label="Configure timer">
+            <PlayIcon />
+          </Next>
+        }
+      </Spring >
+
     </Wrapper>
   )
 };

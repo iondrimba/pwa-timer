@@ -1,25 +1,6 @@
 import styled from 'styled-components';
-import posed from 'react-pose';
 
-const Btn = posed.button({
-  enter: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      y: { type: 'spring', duration: 200 },
-      opacity: { ease: 'easeOut', duration: 300 ,  delay: 200},
-    }
-  },
-  exit: {
-    opacity: 0,
-    y: 50,
-    transition: {
-      opacity: { ease: 'easeOut', duration: 300 },
-    }
-  },
-});
-
-export default styled(Btn)`
+export default styled.button`
   width: 70px;
   border: none;
   border-radius: 80px;
