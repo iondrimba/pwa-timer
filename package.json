@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/jest": "24.0.15",
     "@types/node": "12.6.1",
     "@types/react": "16.8.23",
     "@types/react-dom": "16.8.4",
@@ -24,8 +23,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "coverage": "react-scripts test --coverage --watchAll=false",
+    "test": "react-scripts test --transformIgnorePatterns 'node_modules/react-spring'",
+    "coverage": "react-scripts test --coverage --watchAll=false --transformIgnorePatterns 'node_modules/react-spring'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -61,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^24.0.15",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "babel-plugin-styled-components": "^1.10.6"
   }
