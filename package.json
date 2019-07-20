@@ -9,7 +9,7 @@
     "@types/react-dom": "16.8.4",
     "@types/react-router-dom": "^4.3.4",
     "@types/react-test-renderer": "^16.8.2",
-    "@types/styled-components": "^4.1.16",
+    "@types/styled-components": "^4.1.18",
     "history": "^4.9.0",
     "jest-styled-components": "^6.3.3",
     "react": "^16.8.6",
@@ -24,8 +24,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "coverage": "react-scripts test --coverage --watchAll=false",
+    "test": "react-scripts test --transformIgnorePatterns 'node_modules/react-spring'",
+    "coverage": "react-scripts test --coverage --watchAll=false --transformIgnorePatterns 'node_modules/react-spring'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -61,6 +61,7 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^24.0.15",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "babel-plugin-styled-components": "^1.10.6"
   }
