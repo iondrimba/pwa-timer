@@ -5,18 +5,18 @@
   "dependencies": {
     "@types/jest": "24.0.19",
     "@types/node": "12.7.9",
-    "@types/react": "16.9.7",
+    "@types/react": "16.9.11",
     "@types/react-dom": "16.9.3",
     "@types/react-router-dom": "^5.1.0",
     "@types/react-test-renderer": "^16.9.1",
     "@types/styled-components": "^4.1.19",
     "history": "^4.10.1",
     "jest-styled-components": "^6.3.3",
-    "react": "^16.10.2",
+    "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0",
     "react-spring": "^8.0.27",
-    "react-test-renderer": "^16.10.2",
+    "react-test-renderer": "^16.11.0",
     "styled-components": "^4.4.0",
     "styled-normalize": "^8.0.6",
     "typescript": "3.6.4"
@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.19",
-    "@typescript-eslint/eslint-plugin": "^2.3.2",
+    "@typescript-eslint/eslint-plugin": "^2.6.0",
     "babel-plugin-styled-components": "^1.10.6"
   }
 }
