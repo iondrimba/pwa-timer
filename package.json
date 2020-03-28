@@ -13,7 +13,7 @@
     "history": "^4.10.1",
     "jest-styled-components": "^7.0.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.0",
+    "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "react-spring": "^8.0.27",
     "react-test-renderer": "^16.13.0",
