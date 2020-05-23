@@ -19,7 +19,7 @@
     "react-test-renderer": "^16.13.1",
     "styled-components": "^5.0.1",
     "styled-normalize": "^8.0.7",
-    "typescript": "3.8.3"
+    "typescript": "3.9.3"
   },
   "scripts": {
     "start": "react-scripts start",
